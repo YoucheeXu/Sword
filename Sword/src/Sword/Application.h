@@ -3,16 +3,18 @@
 
 #pragma once
 
+#include "Core.h"
+
 namespace Sword {
 
-class __declspec(dllexport) Application {
- public:
-  Application();
-  virtual ~Application();
+class SWORD_API Application {
+   public:
+    Application();
+    virtual ~Application();
 
-  void Run [[noreturn]] ();
+    [[noreturn]] void Run();
 
- private:
+   private:
 };
 
 // To be defined in CLIENT

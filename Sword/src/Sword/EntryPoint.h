@@ -11,6 +11,9 @@ extern Sword::Application* Sword::CreateApplication();
 int main(int argc, char** argv) {
     Sword::Log::Init();
 
+    SW_CORE_ERROR("Initialized log!");
+    SW_INFO("Initialized log!");
+
     auto app = Sword::CreateApplication();
     app->Run();
     delete app;

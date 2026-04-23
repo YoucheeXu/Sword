@@ -1,22 +1,22 @@
 {
     "configurations": [
         {
-            "name": "MSYS2-Clang",
-            "compileCommands": "${workspaceFolder}/bin/compile_commands.json",
+            "name": "Windows",
+            "compileCommands": "${workspaceFolder}/bin-int/compile_commands.json",
             "includePath": [
+                "${workspaceFolder}/Sword/src",
+                "${workspaceFolder}/Sword/vendor/spdlog/include",
                 "C:/msys64/clang64/include/c++/v1",
                 "C:/msys64/clang64/lib/clang/21/include",
                 "C:/msys64/clang64/include",
-                "C:/msys64/clang64/include/opencv4",
-                "${workspaceFolder}/Sword/src",
-                "${workspaceFolder}/Sword/vendor/spdlog/include"
+                "C:/msys64/clang64/include/opencv4"
             ],
             "defines": [
+                "SW_PLATFORM_WINDOWS",
+                "SW_BUILD_DLL",
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE",
-                "SW_PLATFORM_WINDOWS",
-                "SW_BUILD_DLL"
+                "_UNICODE"
             ],
             "compilerPath": "C:\\msys64\\clang64\\bin\\clang++.exe",
             "cStandard": "c17",

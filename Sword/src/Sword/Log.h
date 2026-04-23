@@ -29,17 +29,17 @@ class SWORD_API Log {
 }  // namespace Sword
 
 // Core log macros
-#define SW_CORE_TRACE(...) ::Sword::Log::GetCoreLogger()->trace(__VA__ARGS__)
-#define SW_CORE_INFO(...)  ::Sword::Log::GetCoreLogger()->info(__VA__ARGS__)
-#define SW_CORE_WARN(...)  ::Sword::Log::GetCoreLogger()->warn(__VA__ARGS__)
-#define SW_CORE_ERROR(...) ::Sword::Log::GetCoreLogger()->error(__VA__ARGS__)
-#define SW_CORE_FATAL(...) ::Sword::Log::GetCoreLogger()->fatal(__VA__ARGS__)
+#define SW_CORE_TRACE(...) ::Sword::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define SW_CORE_INFO(...)  ::Sword::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define SW_CORE_WARN(...)  ::Sword::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define SW_CORE_ERROR(...) ::Sword::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define SW_CORE_FATAL(...) ::Sword::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
 // Cliene log marcos
-#define SW_TRACE(...) ::Sword::Log::GetClientLogger()->trace(__VA__ARGS__)
-#define SW_INFO(...)  ::Sword::Log::GetClientLogger()->info(__VA__ARGS__)
-#define SW_WARN(...)  ::Sword::Log::GetClientLogger()->warn(__VA__ARGS__)
-#define SW_ERROR(...) ::Sword::Log::GetClientLogger()->error(__VA__ARGS__)
-#define SW_FATAL(...) ::Sword::Log::GetClientLogger()->fatal(__VA__ARGS__)
+#define SW_TRACE(...) ::Sword::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define SW_INFO(...)  ::Sword::Log::GetClientLogger()->info(__VA_ARGS__)
+#define SW_WARN(...)  ::Sword::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define SW_ERROR(...) ::Sword::Log::GetClientLogger()->error(__VA_ARGS__)
+#define SW_FATAL(...) ::Sword::Log::GetClientLogger()->fatal(__VA_ARGS__)
 
 #endif

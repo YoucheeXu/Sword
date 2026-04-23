@@ -1,4 +1,4 @@
-#include "../../Sword/Sword.h"
+#include "Sword.h"
 
 class Sandbox : public Sword::Application {
    public:
