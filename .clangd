@@ -1,4 +1,5 @@
 CompileFlags:
+  CompilationDatabase: ./bin-int
   Remove: # Remove false positive errors when using g++-14 with c++20 or above standard
     - "-fmodule*"
     - "-fdeps-format*"
