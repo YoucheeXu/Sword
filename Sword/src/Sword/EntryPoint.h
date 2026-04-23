@@ -1,8 +1,8 @@
 #ifndef C97DEF10_3EBB_4B55_A850_B4B2A67C0A04
 #define C97DEF10_3EBB_4B55_A850_B4B2A67C0A04
 
-// #include "Application.h"
-// #include "Log.h"
+#include "Application.h"
+#include "Log.h"
 
 #ifdef SW_PLATFORM_WINDOWS
 
