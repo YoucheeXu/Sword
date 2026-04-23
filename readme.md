@@ -2,7 +2,9 @@
 
 This is a game engine learning project. Hope it will graduate someday.
 
+Inspired by https://www.youtube.com/@TheCherno
+
 ## Known Issues
 
-- [  ] Build failed.
+- [ x ] Build failed.
 - 
