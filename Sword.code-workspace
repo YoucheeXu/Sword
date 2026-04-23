@@ -1,0 +1,28 @@
+{
+    "folders": [
+        {
+            "path": "Sandbox"
+        },
+        {
+            "path": "Sword"
+        }
+    ],
+    "settings": {
+        "C_Cpp.default.cppStandard": "c++23",
+        "editor.tabSize": 4
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "type": "lldb",
+                "request": "launch",
+                "name": "Launch",
+                "program": "${workspaceFolder}/<program>",
+                "args": [],
+                "cwd": "${workspaceFolder}"
+            }
+
+        ]
+    }
+}
