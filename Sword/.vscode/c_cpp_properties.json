@@ -2,13 +2,14 @@
     "configurations": [
         {
             "name": "MSYS2-Clang",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "compileCommands": "${workspaceFolder}/bin/compile_commands.json",
             "includePath": [
                 "C:/msys64/clang64/include/c++/v1",
                 "C:/msys64/clang64/lib/clang/21/include",
                 "C:/msys64/clang64/include",
                 "C:/msys64/clang64/include/opencv4",
-                "${workspaceFolder}/Sword/src"
+                "${workspaceFolder}/Sword/src",
+                "${workspaceFolder}/Sword/vendor/spdlog/include"
             ],
             "defines": [
                 "_DEBUG",
