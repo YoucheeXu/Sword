@@ -1,31 +1,114 @@
-BasedOnStyle: Google
-IndentWidth: 4        # 缩进宽度（与VSCode的tabSize保持一致）
-UseTab: Never         # 不使用制表符（与insertSpaces: true对应）
-TabWidth: 4           # 制表符宽度（通常与IndentWidth相同
 ---
+# Base Language Setting
 Language: Cpp
-# AlignArrayOfStructures: Right  # Too many false positive
-AllowBreakBeforeNoexceptSpecifier: Always
-AllowShortCompoundRequirementOnASingleLine: true
-AllowShortFunctionsOnASingleLine: Empty
-AllowShortLambdasOnASingleLine: Inline
+
+# Base style inherited from Google C++ Style Guide
+BasedOnStyle: Google
+# Number of spaces for each indentation level
+IndentWidth: 4
+# Never use tab characters for indentation (use spaces only)
+UseTab: Never
+# Visual width of a tab character (matches indent width for consistency)
+TabWidth: 4
+
+# ======================
+# General Code Style
+# ======================
+# Maximum line length before wrapping
+ColumnLimit: 120
+# Indent case labels inside switch statements
+IndentCaseLabels: true
+# Alignment style after opening brackets
+AlignAfterOpenBracket: Align
+# Align consecutive assignment operators
 AlignConsecutiveAssignments:
   Enabled: true
   AlignCompound: true
   PadOperators: true
-AlignConsecutiveBitFields: Consecutive
+# Align consecutive variable declarations
+AlignConsecutiveDeclarations: true
+# Add space before assignment operators
+SpaceBeforeAssignmentOperators: true
+
+# ======================
+# Brace Wrapping Style
+# ======================
+BraceWrapping:
+  AfterClass: false
+  AfterControlStatement: false
+  AfterFunction: false
+  AfterStruct: false
+# Custom brace breaking rules
+BreakBeforeBraces: Custom
+
+# ======================
+# Whitespace Settings
+# ======================
+# No space inside empty parentheses
+SpaceInEmptyParentheses: false
+# Number of spaces before trailing comments
+SpacesBeforeTrailingComments: 2
+# No spaces inside angle brackets
+SpacesInAngles: false
+# No spaces inside parentheses
+SpacesInParentheses: false
+# No spaces inside square brackets
+SpacesInSquareBrackets: false
+
+# ======================
+# Comment Settings
+# ======================
+# Regex for special comment pragmas
+CommentPragmas: '^ IWYU pragma:'
+# Fix and cleanup namespace comments
+FixNamespaceComments: true
+
+# ======================
+# Include File Sorting
+# ======================
+# Preserve order of include blocks
+IncludeBlocks: Preserve
+# Disable automatic sorting of include files
+SortIncludes: false
+
+# ======================
+# Advanced Formatting Rules
+# ======================
+# Align consecutive preprocessor macros
 AlignConsecutiveMacros: Consecutive
+# Align consecutive bit fields
+AlignConsecutiveBitFields: Consecutive
+# Alignment of escaped newlines
 AlignEscapedNewlines: Right
+# Align operands of binary and ternary operators
 AlignOperands: Align
+# Allow breaking before noexcept specifier
+AllowBreakBeforeNoexceptSpecifier: Always
+# Allow short compound requirements on a single line
+AllowShortCompoundRequirementOnASingleLine: true
+# Allow empty short functions on a single line
+AllowShortFunctionsOnASingleLine: Empty
+# Allow inline lambdas on a single line
+AllowShortLambdasOnASingleLine: Inline
+
+# Break adjacent string literals into separate lines
 BreakAdjacentStringLiterals: true
+# Keep break style after attributes unchanged
 BreakAfterAttributes: Leave
+# Break before all binary operators
 BreakBeforeBinaryOperators: All
+# Break before inline ASM colon only for multi-line statements
 BreakBeforeInlineASMColon: OnlyMultiline
+# Disable bin packing for function arguments
 BinPackArguments: false
+# Disable bin packing for function parameters
 BinPackParameters: false
-ColumnLimit: 120
+
+# Do not derive pointer alignment from existing code
 DerivePointerAlignment: false
+# Add an empty line before access modifiers
 EmptyLineBeforeAccessModifier: Always
+# Include file categorization rules
 IncludeCategories:
   - Regex: ".*PPP.*"
     Priority: 2
@@ -41,21 +124,33 @@ IncludeCategories:
     Priority: 2
   - Regex: "^<.*"
     Priority: 3
+# Regex for detecting main include files
 IncludeIsMainRegex: "([-_.](test|unittest|pass|fail))?$"
 IncludeIsMainSourceRegex: ""
+# Auto-insert missing braces for control statements
 InsertBraces: true
+# Integer literal digit separators
 IntegerLiteralSeparator:
   Binary: 4
   Decimal: 0
   Hex: 2
+# Indent requires clause in concepts
 IndentRequiresClause: true
+# Indent preprocessor directives after the # hash
 IndentPPDirectives: AfterHash
+# Insert a newline at the end of files
 InsertNewlineAtEOF: false
+# Line ending format (Unix LF)
 LineEnding: LF
+# Indent namespace contents
 NamespaceIndentation: Inner
+# Place constructor initializers on the next line
 PackConstructorInitializers: NextLine
+# Put requires clause on its own line
 RequiresClausePosition: OwnLine
+# Align pointers to the left (type*)
 PointerAlignment: Left
+# Custom qualifier alignment order
 QualifierAlignment: Custom
 QualifierOrder:
   [
@@ -68,12 +163,22 @@ QualifierOrder:
     "const",
     "volatile",
   ]
+# Align references like pointers
 ReferenceAlignment: Pointer
+# Disable reflowing comments
 ReflowComments: false
-# RemoveParentheses: MultipleParentheses  # Too many false positive
+# Remove redundant semicolons
 RemoveSemicolon: true
+# Indentation style for requires expressions
 RequiresExpressionIndentation: Keyword
+# No empty lines for short namespaces
 ShortNamespaceLines: 0
+# Custom statement macros
 StatementMacros:
   - BOOST_HOF_RETURNS
+
+# Disable indentation for access modifiers (align with class left margin)
+IndentAccessModifiers: false
+# offset for access modifiers
+AccessModifierOffset: -4
 ---
