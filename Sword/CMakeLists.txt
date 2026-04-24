@@ -6,6 +6,8 @@ project(Sword LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+add_subdirectory(vendor/glad)
+
 # ========================
 # 🔥 全自动扫描所有 .cpp 源码（核心！）
 # 递归查找 src/Sword/ 下 所有 .cpp 文件
@@ -19,6 +21,8 @@ add_library(Sword SHARED ${SWORD_SOURCES})
 
 # 定义导出宏（自动生效，无需手动写）
 target_compile_definitions(Sword
+    PRIVATE
+        GLFW_DLL
     PUBLIC
         $<$<PLATFORM_ID:Windows>:SW_PLATFORM_WINDOWS>
         SW_BUILD_DLL
@@ -31,11 +35,19 @@ target_include_directories(Sword
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include
 )
 
+# GLFW
 set(GLFW_ROOT ${CMAKE_SOURCE_DIR}/vendor/glfw-3.4.bin.WIN64)
 target_include_directories(Sword PRIVATE ${GLFW_ROOT}/include)
 target_link_directories(Sword PRIVATE ${GLFW_ROOT}/lib-mingw-w64)
-target_link_libraries(Sword PRIVATE libglfw3dll.a opengl32 gdi32)
-target_compile_definitions(Sword PRIVATE GLFW_DLL)
+
+target_link_libraries(Sword
+    PRIVATE
+        glad
+        libglfw3dll.a
+        opengl32
+        gdi32
+)
+
 add_custom_command(
     TARGET Sword POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different

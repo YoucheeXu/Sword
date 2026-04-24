@@ -5,15 +5,14 @@
 
 #include "Sword/Window.h"
 
-#include <GLFW/glfw3.h>
+struct GLFWwindow;
 
 namespace Sword {
-
 class WindowsWindow : public Window {
-   public:
+public:
     WindowsWindow(WindowProps const& props);
     virtual ~WindowsWindow();
-    void OnUpdate() override;
+    void                OnUpdate() override;
     inline unsigned int GetWidth() const override {
         return m_Data.Width;
     }
@@ -27,17 +26,17 @@ class WindowsWindow : public Window {
     void SetVSync(bool enabled) override;
     bool IsVSync() const override;
 
-   private:
+private:
     virtual void Init(WindowProps const& props);
     virtual void Shutdown();
 
-   private:
+private:
     GLFWwindow* m_Window;
 
     struct WindowData {
-        std::string Title;
+        std::string  Title;
         unsigned int Width, Height;
-        bool VSync;
+        bool         VSync;
 
         EventCallbackFn EventCallback;
     };

@@ -1,10 +1,12 @@
 #include "WindowsWindow.h"
 
-#include "GLFW/glfw3.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Events/KeyEvent.h"
 #include "Sword/Events/MouseEvent.h"
 #include "Sword/Log.h"
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace Sword {
 
@@ -43,6 +45,8 @@ void WindowsWindow::Init(WindowProps const& props) {
 
     m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(m_Window);
+    int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+    SW_CORE_ASSERT(gladStatus, "Failed to initialize GLAD!");
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
 
