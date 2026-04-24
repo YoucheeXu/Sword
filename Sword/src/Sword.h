@@ -6,6 +6,7 @@
 #include "Sword/Application.h"
 #include "Sword/Layer.h"
 #include "Sword/Log.h"
+#include "Sword/ImGui/ImGuiLayer.h"
 
 // ---- Entry Point ----
 #include "Sword/EntryPoint.h"

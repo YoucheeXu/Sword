@@ -18,6 +18,7 @@ class Sandbox : public Sword::Application {
 public:
     Sandbox() {
         PushLayer(new ExampleLayer());
+        PushLayer(new Sword::ImGuiLayer);
     }
 
     ~Sandbox() {}

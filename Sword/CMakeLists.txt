@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(vendor/glad)
+add_subdirectory(vendor/imgui-1.92.7)
 
 # ========================
 # 🔥 全自动扫描所有 .cpp 源码（核心！）
@@ -42,6 +43,7 @@ target_link_directories(Sword PRIVATE ${GLFW_ROOT}/lib-mingw-w64)
 
 target_link_libraries(Sword
     PRIVATE
+        imgui
         glad
         libglfw3dll.a
         opengl32
