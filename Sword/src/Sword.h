@@ -4,6 +4,7 @@
 // For use by Sword application only
 
 #include "Sword/Application.h"
+#include "Sword/Layer.h"
 #include "Sword/Log.h"
 
 // ---- Entry Point ----
