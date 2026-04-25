@@ -11,7 +11,7 @@ add_subdirectory(vendor/imgui-1.92.7)
 
 # ========================
 # 🔥 全自动扫描所有 .cpp 源码（核心！）
-# 递归查找 src/Sword/ 下 所有 .cpp 文件
+# 递归查找 src/ 下 所有 .cpp 文件
 # ========================
 file(GLOB_RECURSE SWORD_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
@@ -29,11 +29,11 @@ target_compile_definitions(Sword
         SW_BUILD_DLL
 )
 
-# 公开头文件目录（Sandbox 可直接引用）
+# 公开头文件目录
 target_include_directories(Sword
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src
-        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog-1.17.0/include
 )
 
 # GLFW

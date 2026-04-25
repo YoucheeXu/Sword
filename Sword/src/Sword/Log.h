@@ -4,15 +4,16 @@
 #pragma once
 
 #include "Core.h"
-// #include "spdlog/fmt/ostr.h"
-#include "spdlog/spdlog.h"
+#define SPDLOG_HEADER_ONLY
+#include <spdlog/fmt/ostr.h>
+#include <spdlog/spdlog.h>
 
 #include <memory>
 
 namespace Sword {
 
 class SWORD_API Log {
-   public:
+public:
     static void Init();
 
     inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() {
@@ -22,7 +23,7 @@ class SWORD_API Log {
         return s_ClientLogger;
     }
 
-   private:
+private:
     static std::shared_ptr<spdlog::logger> s_CoreLogger;
     static std::shared_ptr<spdlog::logger> s_ClientLogger;
 };
@@ -36,7 +37,7 @@ class SWORD_API Log {
 #define SW_CORE_ERROR(...) ::Sword::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define SW_CORE_FATAL(...) ::Sword::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
-// Cliene log marcos
+// Client log marcos
 #define SW_TRACE(...) ::Sword::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define SW_INFO(...)  ::Sword::Log::GetClientLogger()->info(__VA_ARGS__)
 #define SW_WARN(...)  ::Sword::Log::GetClientLogger()->warn(__VA_ARGS__)
