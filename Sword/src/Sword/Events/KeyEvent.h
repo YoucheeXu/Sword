@@ -7,19 +7,19 @@
 
 namespace Sword {
 class SWORD_API KeyEvent : public Event {
-   public:
+public:
     inline int GetKeyCode() const {
         return m_KeyCode;
     }
     EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
-   protected:
+protected:
     KeyEvent(int keycode) : m_KeyCode(keycode) {}
     int m_KeyCode;
 };
 
 class SWORD_API KeyPressedEvent : public KeyEvent {
-   public:
+public:
     KeyPressedEvent(int keycode, int repeatCount) : KeyEvent(keycode), m_RepeatCount(repeatCount) {}
     inline int GetRepeatCount() const {
         return m_RepeatCount;
@@ -32,12 +32,12 @@ class SWORD_API KeyPressedEvent : public KeyEvent {
     }
     EVENT_CLASS_TYPE(KeyPressed)
 
-   private:
+private:
     int m_RepeatCount;
 };
 
 class SWORD_API KeyReleasedEvent : public KeyEvent {
-   public:
+public:
     KeyReleasedEvent(int keycode) : KeyEvent(keycode) {}
     std::string ToString() const override {
         std::stringstream ss;
@@ -47,6 +47,19 @@ class SWORD_API KeyReleasedEvent : public KeyEvent {
 
     EVENT_CLASS_TYPE(KeyReleased);
 };
+
+class SWORD_API KeyTypedEvent : public KeyEvent {
+public:
+    KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
+    std::string ToString() const override {
+        std::stringstream ss;
+        ss << "KeyTypedEvent:" << m_KeyCode;
+        return ss.str();
+    }
+
+    EVENT_CLASS_TYPE(KeyTyped);
+};
+
 }  // namespace Sword
 
 #endif /* BF3CEA0A_F9A0_4258_A256_576901A73083 */

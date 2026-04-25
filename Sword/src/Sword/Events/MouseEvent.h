@@ -7,9 +7,9 @@
 
 namespace Sword {
 class SWORD_API MouseMovedEvent : public Event {
-   public:
+public:
     MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
-    inline float Getx() const {
+    inline float GetX() const {
         return m_MouseX;
     }
     inline float GetY() const {
@@ -23,12 +23,12 @@ class SWORD_API MouseMovedEvent : public Event {
     EVENT_CLASS_TYPE(MouseMoved)
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
-   private:
+private:
     float m_MouseX, m_MouseY;
 };
 
 class SWORD_API MouseScrolledEvent : public Event {
-   public:
+public:
     MouseScrolledEvent(float xoffset, float yoffset) : m_Xoffset(xoffset), m_Yoffset(yoffset) {}
 
     inline float GetXoffset() const {
@@ -47,24 +47,24 @@ class SWORD_API MouseScrolledEvent : public Event {
     EVENT_CLASS_TYPE(MouseScrolled)
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
-   private:
+private:
     float m_Xoffset, m_Yoffset;
 };
 
 class SWORD_API MouseButtonEvent : public Event {
-   public:
+public:
     inline int GetMouseButton() const {
         return m_Button;
     }
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
-   protected:
+protected:
     MouseButtonEvent(int button) : m_Button(button) {}
     int m_Button;
 };
 
 class SWORD_API MouseButtonPressedEvent : public MouseButtonEvent {
-   public:
+public:
     MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
     std::string ToString() const override {
         std::stringstream ss;
@@ -76,7 +76,7 @@ class SWORD_API MouseButtonPressedEvent : public MouseButtonEvent {
 };
 
 class SWORD_API MouseButtonReleasedEvent : public MouseButtonEvent {
-   public:
+public:
     MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
 
     std::string ToString() const override {

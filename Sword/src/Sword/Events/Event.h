@@ -24,6 +24,7 @@ enum class EventType {
     AppRender,
     KeyPressed,
     KeyReleased,
+    KeyTyped,
     MouseButtonPressed,
     MouseButtonReleased,
     MouseMoved,
@@ -56,14 +57,14 @@ enum EventCategory {
     }
 
 class SWORD_API Event {
-   public:
+public:
     virtual ~Event() = default;
 
     bool Handled = false;
 
-    virtual EventType GetEventType() const = 0;
-    virtual char const* GetName() const    = 0;
-    virtual int GetCategoryFlags() const   = 0;
+    virtual EventType   GetEventType() const     = 0;
+    virtual char const* GetName() const          = 0;
+    virtual int         GetCategoryFlags() const = 0;
     virtual std::string ToString() const {
         return GetName();
     }
@@ -72,7 +73,7 @@ class SWORD_API Event {
         return GetCategoryFlags() & category;
     }
 
-   protected:
+protected:
     bool m_Handled = false;
 };
 
@@ -80,7 +81,7 @@ class EventDispatcher {
     template <typename T>
     using EventFn = std::function<bool(T&)>;
 
-   public:
+public:
     EventDispatcher(Event& event) : m_Event(event) {}
 
     // F will be deduced by the compiler
@@ -93,7 +94,7 @@ class EventDispatcher {
         return false;
     }
 
-   private:
+private:
     Event& m_Event;
 };
 

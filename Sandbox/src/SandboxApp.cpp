@@ -5,7 +5,7 @@ public:
     ExampleLayer() : Layer("Example") {}
 
     void OnUpdate() override {
-        SW_INFO("ExampleLayer::Update");
+        // SW_INFO("ExampleLayer::Update");
     }
 
     void OnEvent(Sword::Event& event) override {

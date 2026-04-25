@@ -33,4 +33,6 @@
 
 #define BIT(x) (1 << x)
 
+#define SW_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
 #endif /* B33512D9_1515_4CD8_9044_84E3EBE08700 */
