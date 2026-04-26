@@ -8,7 +8,7 @@
 
 namespace Sword {
 struct WindowProps {
-    std::string Title;
+    std::string  Title;
     unsigned int Width;
     unsigned int Height;
     WindowProps(std::string const& title = "Sword Engine", unsigned int width = 1280, unsigned int height = 720)
@@ -17,7 +17,7 @@ struct WindowProps {
 
 // Interface representing a desktop system based Window
 class SWORD_API Window {
-   public:
+public:
     using EventCallbackFn = std::function<void(Event&)>;
 
     virtual ~Window() = default;
@@ -31,6 +31,8 @@ class SWORD_API Window {
     virtual void SetEventCallback(EventCallbackFn const& callback) = 0;
     virtual void SetVSync(bool enabled)                            = 0;
     virtual bool IsVSync() const                                   = 0;
+
+    virtual void* GetNativeWindow() const = 0;
 
     static Window* Create(WindowProps const& props = WindowProps());
 };
