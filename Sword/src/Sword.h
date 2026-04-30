@@ -6,6 +6,11 @@
 #include "Sword/Application.h"
 #include "Sword/Layer.h"
 #include "Sword/Log.h"
+
+#include "Sword/Input.h"
+#include "Sword/KeyCodes.h"
+#include "Sword/MouseCodes.h"
+
 #include "Sword/ImGui/ImGuiLayer.h"
 
 // ---- Entry Point ----
