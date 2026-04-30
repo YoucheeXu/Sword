@@ -1,5 +1,6 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
+#include "ImGui/ImGuiLayer.h"
 #include "Layer.h"
 #include "LayerStack.h"
 #include "Sword/Events/ApplicationEvent.h"
@@ -37,6 +38,7 @@ private:
     bool OnWindowClose(WindowCloseEvent& e);
 
     std::unique_ptr<Window> m_Window;
+    ImGuiLayer*             m_ImGuiLayer;
     bool                    m_Running = true;
     LayerStack              m_LayerStack;
 

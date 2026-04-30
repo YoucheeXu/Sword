@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(vendor/glad)
-add_subdirectory(vendor/imgui-1.92.7)
+add_subdirectory(vendor/imgui-1.92.7-docking)
 add_subdirectory(vendor/glm-1.0.3)
 
 # ========================

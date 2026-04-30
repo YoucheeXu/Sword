@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include "Events/Event.h"
+#include "ImGui/ImGuiLayer.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Log.h"
 #include "Sword/Window.h"
@@ -22,9 +23,14 @@ Application::Application() {
 
     m_Window = std::unique_ptr<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+    m_ImGuiLayer = new ImGuiLayer();
+    PushOverLay(m_ImGuiLayer);
 }
 
-Application::~Application() {}
+Application::~Application() {
+    delete m_ImGuiLayer;
+}
 
 void Application::PushLayer(Layer* layer) {
     m_LayerStack.PushLayer(layer);
@@ -61,6 +67,12 @@ void Application::Run() {
         for (Layer* layer : m_LayerStack) {
             layer->OnUpdate();
         }
+
+        m_ImGuiLayer->Begin();
+        for (Layer* layer : m_LayerStack) {
+            layer->OnImGuiRender();
+        }
+        m_ImGuiLayer->End();
 
         m_Window->OnUpdate();
     }
