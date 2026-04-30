@@ -105,3 +105,4 @@ inline std::ostream& operator<<(std::ostream& os, Event const& e) {
 }  // namespace Sword
 
 #endif /* B347B851_53BC_40E0_AF1E_E9B23A349D23 */
+
