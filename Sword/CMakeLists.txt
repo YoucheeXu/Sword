@@ -1,8 +1,8 @@
-# Sword：生成 DLL 动态库
+# Sword：complie to static lib
 cmake_minimum_required(VERSION 3.16)
 project(Sword LANGUAGES CXX)
 
-# C++ 标准
+# C++ standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -11,17 +11,17 @@ add_subdirectory(vendor/imgui-1.92.7-docking)
 add_subdirectory(vendor/glm-1.0.3)
 
 # ========================
-# 🔥 全自动扫描所有 .cpp 源码（核心！）
-# 递归查找 src/ 下 所有 .cpp 文件
+# Automatic recursive scan for all .cpp sources
+# Locate all .cpp files recursively in the src/ directory
 # ========================
 file(GLOB_RECURSE SWORD_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
 )
 
-# 自动把所有扫描到的源码编译成 DLL
-add_library(Sword SHARED ${SWORD_SOURCES})
+# add_library(Sword SHARED ${SWORD_SOURCES})
+add_library(Sword STATIC ${SWORD_SOURCES}) # complie to static lib
 
-# 定义导出宏（自动生效，无需手动写）
+# Compile definitions
 target_compile_definitions(Sword
     PRIVATE
         GLFW_DLL
@@ -30,15 +30,16 @@ target_compile_definitions(Sword
         SW_BUILD_DLL
 )
 
-# 公开头文件目录
+# Include directories
 target_include_directories(Sword
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog-1.17.0/include
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm-1.0.3
+        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui-1.92.7-docking
 )
 
-# GLFW
+# GLFW setup (PRIVATE for Sword only)
 set(GLFW_ROOT ${CMAKE_SOURCE_DIR}/vendor/glfw-3.4.bin.WIN64)
 target_include_directories(Sword PRIVATE ${GLFW_ROOT}/include)
 target_link_directories(Sword PRIVATE ${GLFW_ROOT}/lib-mingw-w64)
@@ -61,5 +62,7 @@ add_custom_command(
 )
 
 set_target_properties(Sword PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../bin"
+
+    # RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../bin"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../bin" # Static lib output directory
 )

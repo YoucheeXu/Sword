@@ -4,6 +4,7 @@
 #include <glm/vec4.hpp>                  // glm::vec4
 #include <glm/mat4x4.hpp>                // glm::mat4
 #include <glm/gtc/matrix_transform.hpp>  // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <imgui.h>
 
 glm::mat4 camera(float Translate, glm::vec2 const& Rotate) {
     glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.f);
@@ -21,11 +22,17 @@ public:
         SW_TRACE("length of cam: {0}", cam.length());
     }
 
-    void OnUpdate() override {
+    virtual void OnUpdate() override {
         // SW_INFO("ExampleLayer::Update");
     }
 
-    void OnEvent(Sword::Event& event) override {
+    virtual void OnImGuiRender() override {
+        ImGui::Begin("Test");
+        ImGui::Text("Hello World");
+        ImGui::End();
+    }
+
+    virtual void OnEvent(Sword::Event& event) override {
         // SW_TRACE("[O}", event);
         // SW_TRACE(event.ToString());
     }
