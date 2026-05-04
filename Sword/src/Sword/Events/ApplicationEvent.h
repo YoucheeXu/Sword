@@ -7,7 +7,7 @@
 
 namespace Sword {
 class SWORD_API WindowResizeEvent : public Event {
-   public:
+public:
     WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) {}
     inline unsigned int GetWidth() const {
         return m_Width;
@@ -17,19 +17,19 @@ class SWORD_API WindowResizeEvent : public Event {
     }
     std::string ToString() const override {
         std::stringstream ss;
-        ss << "WindowResizeEvent:" << m_Width << ", " << m_Height;
+        ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
         return ss.str();
     }
 
     EVENT_CLASS_TYPE(WindowResize)
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 
-   private:
+private:
     unsigned int m_Width, m_Height;
 };
 
 class SWORD_API WindowCloseEvent : public Event {
-   public:
+public:
     WindowCloseEvent() = default;
 
     EVENT_CLASS_TYPE(WindowClose)
@@ -37,7 +37,7 @@ class SWORD_API WindowCloseEvent : public Event {
 };
 
 class SWORD_API AppTickEvent : public Event {
-   public:
+public:
     AppTickEvent() = default;
 
     EVENT_CLASS_TYPE(AppTick)
@@ -45,7 +45,7 @@ class SWORD_API AppTickEvent : public Event {
 };
 
 class SWORD_API AppUpdateEvent : public Event {
-   public:
+public:
     AppUpdateEvent() = default;
 
     EVENT_CLASS_TYPE(AppUpdate)
@@ -53,7 +53,7 @@ class SWORD_API AppUpdateEvent : public Event {
 };
 
 class SWORD_API AppRenderEvent : public Event {
-   public:
+public:
     AppRenderEvent() = default;
 
     EVENT_CLASS_TYPE(AppRender)
