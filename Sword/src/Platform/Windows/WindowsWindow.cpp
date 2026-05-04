@@ -4,8 +4,8 @@
 #include "Sword/Events/KeyEvent.h"
 #include "Sword/Events/MouseEvent.h"
 #include "Sword/Log.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace Sword {
@@ -44,9 +44,10 @@ void WindowsWindow::Init(WindowProps const& props) {
     }
 
     m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-    glfwMakeContextCurrent(m_Window);
-    int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-    SW_CORE_ASSERT(gladStatus, "Failed to initialize GLAD!");
+
+    m_Context = new OpenGLContext(m_Window);
+    m_Context->Init();
+
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
 
@@ -134,7 +135,7 @@ void WindowsWindow::Shutdown() {
 
 void WindowsWindow::OnUpdate() {
     glfwPollEvents();
-    glfwSwapBuffers(m_Window);
+    m_Context->SwapBuffers();
 }
 
 void WindowsWindow::SetVSync(bool enabled) {

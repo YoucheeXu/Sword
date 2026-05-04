@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Sword/Window.h"
+#include "Sword/Renderer/GraphicsContext.h"
 
 struct GLFWwindow;
 
@@ -35,7 +36,8 @@ private:
     virtual void Shutdown();
 
 private:
-    GLFWwindow* m_Window;
+    GLFWwindow*      m_Window;
+    GraphicsContext* m_Context;
 
     struct WindowData {
         std::string  Title;
