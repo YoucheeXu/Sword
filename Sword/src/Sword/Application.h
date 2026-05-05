@@ -1,14 +1,16 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
-#include "ImGui/ImGuiLayer.h"
-#include "Layer.h"
-#include "LayerStack.h"
-#include "Sword/Events/ApplicationEvent.h"
+
 #pragma once
 
 #include "Core.h"
 #include "Events/Event.h"
+#include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Window.h"
+#include "Layer.h"
+#include "LayerStack.h"
+#include "ImGui/ImGuiLayer.h"
+#include "Sword/Renderer/Shader.h"
 
 #include <memory>
 
@@ -42,7 +44,8 @@ private:
     bool                    m_Running = true;
     LayerStack              m_LayerStack;
 
-    unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+    unsigned int            m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+    std::unique_ptr<Shader> m_Shader;
 
 private:
     static Application* s_Instance;
