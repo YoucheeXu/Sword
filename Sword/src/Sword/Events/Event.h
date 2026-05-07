@@ -4,7 +4,7 @@
 #include "Sword/Core.h"
 
 #include <functional>
-#include <ostream>
+// #include <ostream>
 #include <string>
 
 namespace Sword {
@@ -98,8 +98,14 @@ private:
     Event& m_Event;
 };
 
-inline std::ostream& operator<<(std::ostream& os, Event const& e) {
-    return os << e.ToString();
+// Works for old version
+// inline std::ostream& operator<<(std::ostream& os, Event const& e) {
+//     return os << e.ToString();
+// }
+
+// Works for new version, see https://fmt.dev/latest/api/#udt
+inline std::string format_as(Event const& e) {
+    return e.ToString();
 }
 
 }  // namespace Sword

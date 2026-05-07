@@ -50,7 +50,7 @@ Application::Application() {
     m_VertexArray->AddVertexBuffer(vertexBuffer);
 
     // Index Buffer
-    unsigned int indices[3] = {0, 1, 2};
+    unsigned int                 indices[3] = {0, 1, 2};
     std::shared_ptr<IndexBuffer> indexBuffer;
     indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
     m_VertexArray->SetIndexBuffer(indexBuffer);
@@ -176,7 +176,7 @@ void Application::OnEvent(Event& e) {
 
 void Application::Run() {
     WindowResizeEvent e(1980, 720);
-    SW_TRACE(e.ToString());
+    SW_TRACE(e);
 
     while (m_Running) {
         glClearColor(0.1, 0.1, 0.1, 1);
