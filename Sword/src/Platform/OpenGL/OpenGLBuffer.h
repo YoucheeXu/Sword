@@ -15,8 +15,16 @@ public:
     virtual void Bind() const override;
     virtual void Unbind() const override;
 
+    virtual BufferLayout const& GetLayout() const override {
+        return m_Layout;
+    }
+    virtual void SetLayout(BufferLayout const& layout) override {
+        m_Layout = layout;
+    }
+
 private:
-    uint32_t m_RendererID;
+    uint32_t     m_RendererID;
+    BufferLayout m_Layout;
 };
 
 class OpenGLIndexBuffer : public IndexBuffer {
