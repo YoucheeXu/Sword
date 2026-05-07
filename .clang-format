@@ -18,6 +18,12 @@ TabWidth: 4
 ColumnLimit: 120
 # Indent case labels inside switch statements
 IndentCaseLabels: true
+AllowShortCaseLabelsOnASingleLine: true
+AlignConsecutiveShortCaseStatements:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: true
+  AlignCaseColons: false
 # Alignment style after opening brackets
 AlignAfterOpenBracket: Align
 # Align consecutive assignment operators
