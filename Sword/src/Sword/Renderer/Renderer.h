@@ -1,8 +1,10 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include "glm/ext/vector_float4.hpp"
 #pragma once
 
+#include "OrthographicCamera.h"
 #include "Sword/Renderer/RenderCommand.h"
 #include "Sword/Renderer/Shader.h"
 
@@ -15,7 +17,7 @@ public:
     Renderer();
     ~Renderer();
 
-    static void BeginScene();
+    static void BeginScene(OrthographicCamera const& camera);
     static void EndScene();
 
     static void Submit(std::shared_ptr<Shader> const&      shader,
@@ -27,6 +29,11 @@ public:
     }
 
 private:
+    struct SceneData {
+        glm::mat4 ViewProjectionMatrix;
+    };
+
+    static SceneData* s_SceneData;
 };
 
 }  // namespace Sword

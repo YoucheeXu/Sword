@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <glm/ext/matrix_float4x4.hpp>
 #include <string>
 #include <cstdint>
 
@@ -15,6 +16,8 @@ public:
 
     void Bind() const;
     void Unbind() const;
+
+    void UploadUniformMat4(std::string const& name, glm::mat4 const& matrix);
 
 private:
     uint32_t m_RendererID;

@@ -1,6 +1,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "Renderer/OrthographicCamera.h"
 #pragma once
 
 #include "Core.h"
@@ -12,6 +13,7 @@
 #include "ImGui/ImGuiLayer.h"
 #include "Sword/Renderer/Shader.h"
 #include "Sword/Renderer/VertexArray.h"
+#include "Sword/Renderer/OrthographicCamera.h"
 
 #include <memory>
 
@@ -50,6 +52,8 @@ private:
 
     std::shared_ptr<Shader>      m_BlueShader;
     std::shared_ptr<VertexArray> m_SquareVertexArray;
+
+    OrthographicCamera m_Camera;
 
 private:
     static Application* s_Instance;
