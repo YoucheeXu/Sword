@@ -2,18 +2,13 @@
 
 #include "Events/Event.h"
 #include "ImGui/ImGuiLayer.h"
-#include "Renderer/Buffer.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Log.h"
-#include "Sword/Renderer/Shader.h"
-#include "Sword/Renderer/VertexArray.h"
-#include "Sword/Window.h"
+#include "Sword/Renderer/Renderer.h"
 
 #include <cstdint>
 #include <functional>
 #include <memory>
-
-#include <glad/glad.h>
 
 namespace Sword {
 
@@ -179,16 +174,18 @@ void Application::Run() {
     SW_TRACE(e);
 
     while (m_Running) {
-        glClearColor(0.1, 0.1, 0.1, 1);
-        glClear(GL_COLOR_BUFFER_BIT);
+        RenderCommand::SetClearColor({0.1, 0.1, 0.1, 1});
+        RenderCommand::Clear();
 
-        m_BlueShader->Bind();
-        m_SquareVertexArray->Bind();
-        glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+        Renderer::BeginScene();
+        {
+            m_BlueShader->Bind();
+            Renderer::Submit(m_BlueShader, m_SquareVertexArray);
 
-        m_Shader->Bind();
-        m_VertexArray->Bind();
-        glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            m_Shader->Bind();
+            Renderer::Submit(m_Shader, m_VertexArray);
+        }
+        Renderer::EndScene();
 
         for (Layer* layer : m_LayerStack) {
             layer->OnUpdate();

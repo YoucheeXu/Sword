@@ -11,7 +11,6 @@
 #include "LayerStack.h"
 #include "ImGui/ImGuiLayer.h"
 #include "Sword/Renderer/Shader.h"
-#include "Sword/Renderer/Buffer.h"
 #include "Sword/Renderer/VertexArray.h"
 
 #include <memory>
@@ -46,8 +45,8 @@ private:
     bool                    m_Running = true;
     LayerStack              m_LayerStack;
 
-    std::shared_ptr<Shader>       m_Shader;
-    std::shared_ptr<VertexArray>  m_VertexArray;
+    std::shared_ptr<Shader>      m_Shader;
+    std::shared_ptr<VertexArray> m_VertexArray;
 
     std::shared_ptr<Shader>      m_BlueShader;
     std::shared_ptr<VertexArray> m_SquareVertexArray;
