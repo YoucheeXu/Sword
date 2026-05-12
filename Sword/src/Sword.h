@@ -13,6 +13,17 @@
 
 #include "Sword/ImGui/ImGuiLayer.h"
 
+// ---- Renderer ----
+#include "Sword/Renderer/Renderer.h"
+#include "Sword/Renderer/RenderCommand.h"
+
+#include "Sword/Renderer/Shader.h"
+#include "Sword/Renderer/Buffer.h"
+#include "Sword/Renderer/VertexArray.h"
+
+#include "Sword/Renderer/OrthographicCamera.h"
+// ---------------------
+
 // ---- Entry Point ----
 #include "Sword/EntryPoint.h"
 // ---------------------
