@@ -1,8 +1,10 @@
 #include "Sword.h"
+#include "Sword/Input.h"
+#include "Sword/KeyCodes.h"
 
 class ExampleLayer : public Sword::Layer {
 public:
-    ExampleLayer() : Layer("Example"), m_Camera(-2.0f, 2.0f, -1.125f, 1.125f) {
+    ExampleLayer() : Layer("Example"), m_Camera(-2.0f, 2.0f, -1.125f, 1.125f), m_CameraPosition(0.0f) {
         // Vertex Array
         m_VertexArray.reset(Sword::VertexArray::Create());
 
@@ -123,11 +125,28 @@ public:
     }
 
     virtual void OnUpdate() override {
+        // more smooth
+        if (Sword::Input::IsKeyPressed(Sword::Key::Left)) {
+            m_CameraPosition.x += m_CameraMoveSpeed;
+        } else if (Sword::Input::IsKeyPressed(Sword::Key::Right)) {
+            m_CameraPosition.x -= m_CameraMoveSpeed;
+        } else if (Sword::Input::IsKeyPressed(Sword::Key::Down)) {
+            m_CameraPosition.y += m_CameraMoveSpeed;
+        } else if (Sword::Input::IsKeyPressed(Sword::Key::Up)) {
+            m_CameraPosition.y -= m_CameraMoveSpeed;
+        }
+
+        if (Sword::Input::IsKeyPressed(Sword::Key::A)) {
+            m_CameraRotation -= m_CameraRotationSpeed;
+        } else if (Sword::Input::IsKeyPressed(Sword::Key::D)) {
+            m_CameraRotation += m_CameraRotationSpeed;
+        }
+
         Sword::RenderCommand::SetClearColor({0.1, 0.1, 0.1, 1});
         Sword::RenderCommand::Clear();
 
-        m_Camera.SetPosition({0.5f, 0.5, 0.0f});
-        m_Camera.SetRotation(45.0f);
+        m_Camera.SetPosition(m_CameraPosition);
+        m_Camera.SetRotation(m_CameraRotation);
 
         Sword::Renderer::BeginScene(m_Camera);
 
@@ -139,7 +158,24 @@ public:
 
     virtual void OnImGuiRender() override {}
 
-    virtual void OnEvent(Sword::Event& event) override {}
+    virtual void OnEvent(Sword::Event& event) override {
+        Sword::EventDispatcher dispatcher(event);
+        dispatcher.Dispatch<Sword::KeyPressedEvent>(SW_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
+    }
+
+    bool OnKeyPressedEvent(Sword::KeyPressedEvent& event) {
+        // if (event.GetKeyCode() == Sword::Key::Left) {
+        //     m_CameraPosition.x += m_CameraMoveSpeed;
+        // } else if (event.GetKeyCode() == Sword::Key::Right) {
+        //     m_CameraPosition.x -= m_CameraMoveSpeed;
+        // } else if (event.GetKeyCode() == Sword::Key::Down) {
+        //     m_CameraPosition.y += m_CameraMoveSpeed;
+        // } else if (event.GetKeyCode() == Sword::Key::Up) {
+        //     m_CameraPosition.y -= m_CameraMoveSpeed;
+        // }
+
+        return false;
+    }
 
 private:
     std::shared_ptr<Sword::Shader>      m_Shader;
@@ -149,6 +185,12 @@ private:
     std::shared_ptr<Sword::VertexArray> m_SquareVertexArray;
 
     Sword::OrthographicCamera m_Camera;
+
+    glm::vec3 m_CameraPosition;
+    float     m_CameraMoveSpeed = 0.1f;
+
+    float m_CameraRotation      = 0.0f;
+    float m_CameraRotationSpeed = 1.0f;
 };
 
 class Sandbox : public Sword::Application {
