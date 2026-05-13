@@ -3,12 +3,12 @@
 
 #pragma once
 
-#include "Core.h"
-#include "Events/Event.h"
+#include "Sword/Core.h"
+#include "Sword/Events/Event.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Window.h"
-#include "Layer.h"
-#include "LayerStack.h"
+#include "Sword/Layer.h"
+#include "Sword/LayerStack.h"
 #include "ImGui/ImGuiLayer.h"
 
 #include <memory>
@@ -42,6 +42,8 @@ private:
     ImGuiLayer*             m_ImGuiLayer;
     bool                    m_Running = true;
     LayerStack              m_LayerStack;
+
+    float m_LastFrameTime = 0.0f;
 
 private:
     static Application* s_Instance;

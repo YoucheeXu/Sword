@@ -1,12 +1,14 @@
 #include "Application.h"
 
-#include "Events/Event.h"
-#include "ImGui/ImGuiLayer.h"
+#include "Sword/Core/TimeStep.h"
+#include "Sword/Events/Event.h"
+#include "Sword/ImGui/ImGuiLayer.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Log.h"
 
 #include <functional>
 #include <memory>
+#include <GLFW/glfw3.h>
 
 namespace Sword {
 
@@ -58,8 +60,12 @@ void Application::Run() {
     SW_TRACE(e);
 
     while (m_Running) {
+        float    time     = (float)glfwGetTime();  // Platform::GetTime()
+        TimeStep timeStep = time - m_LastFrameTime;
+        m_LastFrameTime   = time;
+
         for (Layer* layer : m_LayerStack) {
-            layer->OnUpdate();
+            layer->OnUpdate(timeStep);
         }
 
         m_ImGuiLayer->Begin();

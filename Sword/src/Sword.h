@@ -7,6 +7,8 @@
 #include "Sword/Layer.h"
 #include "Sword/Log.h"
 
+#include "Sword/Core/TimeStep.h"
+
 #include "Sword/Input.h"
 #include "Sword/KeyCodes.h"
 #include "Sword/MouseCodes.h"

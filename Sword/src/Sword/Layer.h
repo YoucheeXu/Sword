@@ -4,7 +4,9 @@
 #pragma once
 
 #include "Sword/Core.h"
+#include "Sword/Core/TimeStep.h"
 #include "Sword/Events/Event.h"
+
 #include <string>
 
 namespace Sword {
@@ -16,7 +18,7 @@ public:
 
     virtual void OnAttach() {}
     virtual void OnDetach() {}
-    virtual void OnUpdate() {}
+    virtual void OnUpdate(TimeStep ts) {}
     virtual void OnImGuiRender() {}
     virtual void OnEvent(Event& event) {}
 

@@ -1,6 +1,4 @@
 #include "Sword.h"
-#include "Sword/Input.h"
-#include "Sword/KeyCodes.h"
 
 class ExampleLayer : public Sword::Layer {
 public:
@@ -124,22 +122,24 @@ public:
         m_BlueShader.reset(new Sword::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
     }
 
-    virtual void OnUpdate() override {
+    virtual void OnUpdate(Sword::TimeStep ts) override {
         // more smooth
+        float moveSpeed = m_CameraMoveSpeed * ts;
         if (Sword::Input::IsKeyPressed(Sword::Key::Left)) {
-            m_CameraPosition.x += m_CameraMoveSpeed;
+            m_CameraPosition.x += moveSpeed;
         } else if (Sword::Input::IsKeyPressed(Sword::Key::Right)) {
-            m_CameraPosition.x -= m_CameraMoveSpeed;
+            m_CameraPosition.x -= moveSpeed;
         } else if (Sword::Input::IsKeyPressed(Sword::Key::Down)) {
-            m_CameraPosition.y += m_CameraMoveSpeed;
+            m_CameraPosition.y += moveSpeed;
         } else if (Sword::Input::IsKeyPressed(Sword::Key::Up)) {
-            m_CameraPosition.y -= m_CameraMoveSpeed;
+            m_CameraPosition.y -= moveSpeed;
         }
 
+        float rotationSpeed = m_CameraRotationSpeed * ts;
         if (Sword::Input::IsKeyPressed(Sword::Key::A)) {
-            m_CameraRotation -= m_CameraRotationSpeed;
+            m_CameraRotation -= rotationSpeed;
         } else if (Sword::Input::IsKeyPressed(Sword::Key::D)) {
-            m_CameraRotation += m_CameraRotationSpeed;
+            m_CameraRotation += rotationSpeed;
         }
 
         Sword::RenderCommand::SetClearColor({0.1, 0.1, 0.1, 1});
@@ -187,10 +187,10 @@ private:
     Sword::OrthographicCamera m_Camera;
 
     glm::vec3 m_CameraPosition;
-    float     m_CameraMoveSpeed = 0.1f;
+    float     m_CameraMoveSpeed = 5.0f;
 
     float m_CameraRotation      = 0.0f;
-    float m_CameraRotationSpeed = 1.0f;
+    float m_CameraRotationSpeed = 180.0f;
 };
 
 class Sandbox : public Sword::Application {
