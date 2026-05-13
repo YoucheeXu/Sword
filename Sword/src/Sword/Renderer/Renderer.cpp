@@ -19,6 +19,7 @@ void Renderer::Submit(std::shared_ptr<Shader> const&      shader,
                       glm::mat4 const&                    transform) {
     shader->Bind();
     shader->UploadUniformMat4("m_ViewProjection", s_SceneData->ViewProjectionMatrix);
+    shader->UploadUniformMat4("m_Transform", transform);
 
     vertexArray->Bind();
     RenderCommand::DrawIndexed(vertexArray);

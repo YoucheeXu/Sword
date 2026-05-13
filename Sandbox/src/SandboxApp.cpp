@@ -1,8 +1,12 @@
 #include "Sword.h"
+#include "glm/ext/matrix_float4x4.hpp"
+#include "glm/ext/matrix_transform.hpp"
+#include "glm/ext/vector_float3.hpp"
 
 class ExampleLayer : public Sword::Layer {
 public:
-    ExampleLayer() : Layer("Example"), m_Camera(-2.0f, 2.0f, -1.125f, 1.125f), m_CameraPosition(0.0f) {
+    ExampleLayer()
+        : Layer("Example"), m_Camera(-2.0f, 2.0f, -1.125f, 1.125f), m_CameraPosition(0.0f), m_SquarePosition(0.0f) {
         // Vertex Array
         m_VertexArray.reset(Sword::VertexArray::Create());
 
@@ -30,17 +34,17 @@ public:
         m_SquareVertexArray.reset(Sword::VertexArray::Create());
 
         float squareVertices[3 * 4] = {
-            -0.75f,
-            -0.75f,
+            -0.5f,
+            -0.5f,
             0.0f,
-            0.75f,
-            -0.75f,
+            0.5f,
+            -0.5f,
             0.0f,
-            0.75f,
-            0.75f,
+            0.5f,
+            0.5f,
             0.0f,
-            -0.75f,
-            0.75f,
+            -0.5f,
+            0.5f,
             0.0f,
         };
         std::shared_ptr<Sword::VertexBuffer> squareVertexBuffer;
@@ -65,6 +69,7 @@ public:
         layout(location = 1) in vec4 a_Color;
 
         uniform mat4 m_ViewProjection;
+        uniform mat4 m_Transform;
 
         out vec3 v_Position;
         out vec4 v_Color;
@@ -72,7 +77,7 @@ public:
         void main() {
             v_Position = a_Position;
             v_Color = a_Color;
-            gl_Position = m_ViewProjection * vec4(a_Position, 1.0);
+            gl_Position = m_ViewProjection * m_Transform * vec4(a_Position, 1.0);
         }    
     )";
 
@@ -98,12 +103,13 @@ public:
         layout(location = 0) in vec3 a_Position;
 
         uniform mat4 m_ViewProjection;
+        uniform mat4 m_Transform;
 
         out vec3 v_Position;
 
         void main() {
             v_Position = a_Position;
-            gl_Position = m_ViewProjection * vec4(a_Position, 1.0);
+            gl_Position = m_ViewProjection * m_Transform * vec4(a_Position, 1.0);
         }    
     )";
 
@@ -142,6 +148,17 @@ public:
             m_CameraRotation += rotationSpeed;
         }
 
+        moveSpeed = m_SquareMoveSpeed * ts;
+        if (Sword::Input::IsKeyPressed(Sword::Key::J)) {
+            m_SquarePosition.x -= moveSpeed;
+        } else if (Sword::Input::IsKeyPressed(Sword::Key::L)) {
+            m_SquarePosition.x += moveSpeed;
+        } else if (Sword::Input::IsKeyPressed(Sword::Key::K)) {
+            m_SquarePosition.y -= moveSpeed;
+        } else if (Sword::Input::IsKeyPressed(Sword::Key::I)) {
+            m_SquarePosition.y += moveSpeed;
+        }
+
         Sword::RenderCommand::SetClearColor({0.1, 0.1, 0.1, 1});
         Sword::RenderCommand::Clear();
 
@@ -150,8 +167,17 @@ public:
 
         Sword::Renderer::BeginScene(m_Camera);
 
-        Sword::Renderer::Submit(m_BlueShader, m_SquareVertexArray);
-        Sword::Renderer::Submit(m_Shader, m_VertexArray);
+        static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
+                glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+                glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+                Sword::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);
+            }
+        }
+        glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), m_SquarePosition);
+        Sword::Renderer::Submit(m_Shader, m_VertexArray, transform2);
 
         Sword::Renderer::EndScene();
     }
@@ -191,6 +217,9 @@ private:
 
     float m_CameraRotation      = 0.0f;
     float m_CameraRotationSpeed = 180.0f;
+
+    glm::vec3 m_SquarePosition;
+    float     m_SquareMoveSpeed = 1.0f;
 };
 
 class Sandbox : public Sword::Application {
