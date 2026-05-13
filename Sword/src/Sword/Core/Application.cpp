@@ -4,7 +4,7 @@
 #include "Sword/Events/Event.h"
 #include "Sword/ImGui/ImGuiLayer.h"
 #include "Sword/Events/ApplicationEvent.h"
-#include "Sword/Log.h"
+#include "Sword/Core/Log.h"
 
 #include <functional>
 #include <memory>

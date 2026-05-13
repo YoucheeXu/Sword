@@ -1,8 +1,7 @@
 #include "ImGuiLayer.h"
-#include "Sword/Application.h"
+#include "Sword/Core/Application.h"
 #include "Sword/Events/Event.h"
-#include "Sword/Layer.h"
-#include "Sword/Log.h"
+#include "Sword/Core/Log.h"
 
 #include <GLFW/glfw3.h>
 #include <imgui.h>

@@ -1,6 +1,5 @@
 #include "OpenGLContext.h"
-
-#include "Sword/Log.h"
+#include "Sword/Core/Log.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

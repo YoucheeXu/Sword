@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Sword/Window.h"
+#include "Sword/Core/Window.h"
 #include "Sword/Renderer/GraphicsContext.h"
 
 struct GLFWwindow;

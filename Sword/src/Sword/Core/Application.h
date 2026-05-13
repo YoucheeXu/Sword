@@ -3,13 +3,13 @@
 
 #pragma once
 
-#include "Sword/Core.h"
+#include "Sword/Core/Core.h"
 #include "Sword/Events/Event.h"
 #include "Sword/Events/ApplicationEvent.h"
-#include "Sword/Window.h"
-#include "Sword/Layer.h"
-#include "Sword/LayerStack.h"
-#include "ImGui/ImGuiLayer.h"
+#include "Sword/Core/Window.h"
+#include "Sword/Core/Layer.h"
+#include "Sword/Core/LayerStack.h"
+#include "Sword/ImGui/ImGuiLayer.h"
 
 #include <memory>
 

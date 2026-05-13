@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Sword/Input.h"
+#include "Sword/Core/Input.h"
 
 namespace Sword {
 

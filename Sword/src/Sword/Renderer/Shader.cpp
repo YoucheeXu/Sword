@@ -1,10 +1,9 @@
 #include "Shader.h"
+#include "Sword/Core/Log.h"
 
 #include <vector>
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
-
-#include "Sword/Log.h"
 
 namespace Sword {
 

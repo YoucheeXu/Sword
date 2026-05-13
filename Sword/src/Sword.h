@@ -3,15 +3,15 @@
 
 // For use by Sword application only
 
-#include "Sword/Application.h"
-#include "Sword/Layer.h"
-#include "Sword/Log.h"
+#include "Sword/Core/Application.h"
+#include "Sword/Core/Layer.h"
+#include "Sword/Core/Log.h"
 
 #include "Sword/Core/TimeStep.h"
 
-#include "Sword/Input.h"
-#include "Sword/KeyCodes.h"
-#include "Sword/MouseCodes.h"
+#include "Sword/Core/Input.h"
+#include "Sword/Core/KeyCodes.h"
+#include "Sword/Core/MouseCodes.h"
 
 #include "Sword/ImGui/ImGuiLayer.h"
 
@@ -27,7 +27,7 @@
 // ---------------------
 
 // ---- Entry Point ----
-#include "Sword/EntryPoint.h"
+#include "Sword/Core/EntryPoint.h"
 // ---------------------
 
 #endif /* A4F91456_F948_4788_8885_82765969EEBA */

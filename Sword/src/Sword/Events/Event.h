@@ -1,7 +1,7 @@
 #ifndef B347B851_53BC_40E0_AF1E_E9B23A349D23
 #define B347B851_53BC_40E0_AF1E_E9B23A349D23
 
-#include "Sword/Core.h"
+#include "Sword/Core/Core.h"
 
 #include <functional>
 // #include <ostream>
@@ -111,4 +111,3 @@ inline std::string format_as(Event const& e) {
 }  // namespace Sword
 
 #endif /* B347B851_53BC_40E0_AF1E_E9B23A349D23 */
-

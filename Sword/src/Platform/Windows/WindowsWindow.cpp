@@ -1,9 +1,9 @@
 #include "WindowsWindow.h"
 
+#include "Sword/Core/Log.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Events/KeyEvent.h"
 #include "Sword/Events/MouseEvent.h"
-#include "Sword/Log.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
 #include <GLFW/glfw3.h>

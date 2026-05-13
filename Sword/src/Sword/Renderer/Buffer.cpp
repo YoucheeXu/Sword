@@ -1,6 +1,6 @@
 #include "Buffer.h"
 
-#include "Sword/Core.h"
+#include "Sword/Core/Core.h"
 #include "RendererAPI.h"
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
@@ -11,8 +11,7 @@ VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size) {
         case Sword::RendererAPI::API::None:
             SW_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-        case RendererAPI::API::OpenGL:
-            return new OpenGLVertexBuffer(vertices, size);
+        case RendererAPI::API::OpenGL: return new OpenGLVertexBuffer(vertices, size);
     }
 
     SW_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -24,8 +23,7 @@ IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t count) {
         case Sword::RendererAPI::API::None:
             SW_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
-        case RendererAPI::API::OpenGL:
-            return new OpenGLIndexBuffer(indices, count);
+        case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, count);
     }
 
     SW_CORE_ASSERT(false, "Unknown RendererAPI!");

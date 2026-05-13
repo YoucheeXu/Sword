@@ -1,5 +1,5 @@
 #include "WindowsInput.h"
-#include "Sword/Application.h"
+#include "Sword/Core/Application.h"
 
 #include <GLFW/glfw3.h>
 
