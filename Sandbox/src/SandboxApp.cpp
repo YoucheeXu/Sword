@@ -1,7 +1,12 @@
 #include "Sword.h"
-#include "glm/ext/matrix_float4x4.hpp"
-#include "glm/ext/matrix_transform.hpp"
-#include "glm/ext/vector_float3.hpp"
+
+#include "Platform/OpenGL/OpenGLShader.h"
+
+#include <glm/ext/matrix_float4x4.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/vector_float3.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <imgui.h>
 
 class ExampleLayer : public Sword::Layer {
 public:
@@ -95,7 +100,7 @@ public:
         }           
     )";
 
-        m_Shader.reset(new Sword::Shader(vertexSrc, fragmentSrc));
+        m_Shader.reset(Sword::Shader::Create(vertexSrc, fragmentSrc));
 
         std::string flatColorShaderVertexSrc = R"(
         #version 330 core
@@ -120,14 +125,14 @@ public:
 
         in vec3 v_Position;
 
-        uniform vec4 u_Color;
+        uniform vec3 u_Color;
 
         void main() {
-            color = u_Color;
+            color = vec4(u_Color, 1.0);
         }           
     )";
 
-        m_FlatColorShader.reset(new Sword::Shader(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+        m_FlatColorShader.reset(Sword::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
     }
 
     virtual void OnUpdate(Sword::TimeStep ts) override {
@@ -173,15 +178,28 @@ public:
 
         glm::vec4 redColor(0.8, 0.2, 0.3, 1.0);
         glm::vec4 blueColor(0.2, 0.3, 0.8, 1.0);
+
+        // Sword::MaterialRef material = new Sword::Material(m_FlatColorShader);
+        // Sword::MaterialInstanceRef mi = new Sword::MaterialInstance(material);
+
+        // mi->SetValue("u_Color", redColor);
+        // mi->SetTexture("u_AlbedoMap", texture);
+        // squareMesh->SetMaterial(mi);
+
+        std::dynamic_pointer_cast<Sword::OpenGLShader>(m_FlatColorShader)->Bind();
+        std::dynamic_pointer_cast<Sword::OpenGLShader>(m_FlatColorShader)
+            ->UploadUniformFloat3("u_Color", m_SquareColor);
+
         for (int y = 0; y < 20; y++) {
             for (int x = 0; x < 20; x++) {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-                if (x % 2 == 0) {
-                    m_FlatColorShader->UploadUniformFloat4("u_Color", redColor);
-                } else {
-                    m_FlatColorShader->UploadUniformFloat4("u_Color", blueColor);
-                }
+                // if (x % 2 == 0) {
+                //     m_FlatColorShader->UploadUniformFloat4("u_Color", redColor);
+                // } else {
+                //     m_FlatColorShader->UploadUniformFloat4("u_Color", blueColor);
+                // }
+                // Sword::Renderer::Submit(mi, m_SquareVertexArray, transform);
                 Sword::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
             }
         }
@@ -191,7 +209,11 @@ public:
         Sword::Renderer::EndScene();
     }
 
-    virtual void OnImGuiRender() override {}
+    virtual void OnImGuiRender() override {
+        ImGui::Begin("Settings");
+        ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+        ImGui::End();
+    }
 
     virtual void OnEvent(Sword::Event& event) override {
         Sword::EventDispatcher dispatcher(event);
@@ -229,6 +251,8 @@ private:
 
     glm::vec3 m_SquarePosition;
     float     m_SquareMoveSpeed = 1.0f;
+
+    glm::vec3 m_SquareColor = {0.2f, 0.3f, 0.8f};
 };
 
 class Sandbox : public Sword::Application {
