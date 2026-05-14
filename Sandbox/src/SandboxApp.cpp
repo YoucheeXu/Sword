@@ -97,7 +97,7 @@ public:
 
         m_Shader.reset(new Sword::Shader(vertexSrc, fragmentSrc));
 
-        std::string blueShaderVertexSrc = R"(
+        std::string flatColorShaderVertexSrc = R"(
         #version 330 core
 
         layout(location = 0) in vec3 a_Position;
@@ -113,19 +113,21 @@ public:
         }    
     )";
 
-        std::string blueShaderFragmentSrc = R"(
+        std::string flatColorShaderFragmentSrc = R"(
         #version 330 core
 
         layout(location = 0) out vec4 color;
 
         in vec3 v_Position;
 
+        uniform vec4 u_Color;
+
         void main() {
-            color = vec4(0.2, 0.3, 0.8, 1.0);
+            color = u_Color;
         }           
     )";
 
-        m_BlueShader.reset(new Sword::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+        m_FlatColorShader.reset(new Sword::Shader(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
     }
 
     virtual void OnUpdate(Sword::TimeStep ts) override {
@@ -169,11 +171,18 @@ public:
 
         static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+        glm::vec4 redColor(0.8, 0.2, 0.3, 1.0);
+        glm::vec4 blueColor(0.2, 0.3, 0.8, 1.0);
         for (int y = 0; y < 20; y++) {
             for (int x = 0; x < 20; x++) {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-                Sword::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);
+                if (x % 2 == 0) {
+                    m_FlatColorShader->UploadUniformFloat4("u_Color", redColor);
+                } else {
+                    m_FlatColorShader->UploadUniformFloat4("u_Color", blueColor);
+                }
+                Sword::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
             }
         }
         glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), m_SquarePosition);
@@ -207,7 +216,7 @@ private:
     std::shared_ptr<Sword::Shader>      m_Shader;
     std::shared_ptr<Sword::VertexArray> m_VertexArray;
 
-    std::shared_ptr<Sword::Shader>      m_BlueShader;
+    std::shared_ptr<Sword::Shader>      m_FlatColorShader;
     std::shared_ptr<Sword::VertexArray> m_SquareVertexArray;
 
     Sword::OrthographicCamera m_Camera;

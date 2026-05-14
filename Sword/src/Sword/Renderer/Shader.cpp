@@ -130,6 +130,12 @@ void Shader::Unbind() const {
     glUseProgram(0);
 }
 
+void Shader::UploadUniformFloat4(std::string const& name, glm::vec4 const& vec)
+{
+    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniform4f(location, vec.x, vec.y, vec.z, vec.w);    
+}
+
 void Shader::UploadUniformMat4(std::string const& name, glm::mat4 const& matrix) {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
