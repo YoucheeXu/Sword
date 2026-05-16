@@ -85,7 +85,8 @@ void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSource
     // Get a program object.
     GLuint program = glCreateProgram();
 
-    std::vector<GLenum> glShaderIDs(shaderSource.size());
+    std::vector<GLenum> glShaderIDs;
+    glShaderIDs.reserve(shaderSource.size());
     for (auto& kv : shaderSource) {
         GLenum             type   = kv.first;
         std::string const& source = kv.second;
