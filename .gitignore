@@ -40,3 +40,6 @@
 # dirs
 bin/
 bin-int/
+
+# imgui
+imgui.ini
