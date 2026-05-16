@@ -17,14 +17,14 @@
 #    define SW_ASSERT(x, ...)                                                                                          \
         {                                                                                                              \
             if (!(x)) {                                                                                                \
-                SW_ERROR("Assertion Failed:{O}", __VA_ARGS__);                                                         \
+                SW_ERROR("Assertion Failed:{}", __VA_ARGS__);                                                          \
                 _debugbreak();                                                                                         \
             }                                                                                                          \
         }
 #    define SW_CORE_ASSERT(x, ...)                                                                                     \
         {                                                                                                              \
             if (!(x)) {                                                                                                \
-                SW_CORE_ERROR("Assertion Failed:{O}", __VA_ARGS__);                                                    \
+                SW_CORE_ERROR("Assertion Failed:{}", __VA_ARGS__);                                                     \
                 __debugbreak();                                                                                        \
             }                                                                                                          \
         }
@@ -39,14 +39,12 @@
 
 namespace Sword {
 
-    template<typename T>
-    using Scope = std::unique_ptr<T>;
+template <typename T>
+using Scope = std::unique_ptr<T>;
 
+template <typename T>
+using Ref = std::shared_ptr<T>;
 
-    template<typename T>
-    using Ref = std::shared_ptr<T>;
-
-}
-
+}  // namespace Sword
 
 #endif /* B33512D9_1515_4CD8_9044_84E3EBE08700 */

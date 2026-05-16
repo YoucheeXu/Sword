@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(vendor/glad)
 add_subdirectory(vendor/imgui-1.92.7-docking)
 add_subdirectory(vendor/glm-1.0.3)
+add_subdirectory(vendor/stb_image)
 
 # ========================
 # Automatic recursive scan for all .cpp sources
@@ -37,6 +38,7 @@ target_include_directories(Sword
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/spdlog-1.17.0/include
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm-1.0.3
         ${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui-1.92.7-docking
+        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb_image
 )
 
 # GLFW setup (PRIVATE for Sword only)
@@ -46,6 +48,7 @@ target_link_directories(Sword PRIVATE ${GLFW_ROOT}/lib-mingw-w64)
 
 target_link_libraries(Sword
     PRIVATE
+        stb_image
         glm
         imgui
         glad
