@@ -29,6 +29,7 @@ target_compile_definitions(Sword
     PUBLIC
         $<$<PLATFORM_ID:Windows>:SW_PLATFORM_WINDOWS>
         SW_BUILD_DLL
+        SW_DEBUG
 )
 
 # Include directories

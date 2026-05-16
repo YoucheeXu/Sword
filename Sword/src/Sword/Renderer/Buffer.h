@@ -7,7 +7,7 @@
 #include <vector>
 #include <cstdint>
 
-#include "Sword/Core/Core.h"
+#include "Sword/Core/Assert.h"
 
 namespace Sword {
 

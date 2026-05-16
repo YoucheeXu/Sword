@@ -1,13 +1,13 @@
 #include "OpenGLShader.h"
 
-#include "Sword/Core/Log.h"
-
 #include <array>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "Sword/Core/Assert.h"
 
 namespace Sword {
 

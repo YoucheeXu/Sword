@@ -3,9 +3,9 @@
 
 // For use by Sword application only
 
+#include "Sword/Core/Assert.h"
 #include "Sword/Core/Application.h"
 #include "Sword/Core/Layer.h"
-#include "Sword/Core/Log.h"
 
 #include "Sword/Core/TimeStep.h"
 

@@ -1,12 +1,12 @@
 #include "WindowsWindow.h"
 
-#include "Sword/Core/Log.h"
+#include <GLFW/glfw3.h>
+
+#include "Sword/Core/Assert.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Events/KeyEvent.h"
 #include "Sword/Events/MouseEvent.h"
 #include "Platform/OpenGL/OpenGLContext.h"
-
-#include <GLFW/glfw3.h>
 
 namespace Sword {
 
