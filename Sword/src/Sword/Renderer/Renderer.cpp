@@ -23,9 +23,9 @@ void Renderer::Submit(std::shared_ptr<Shader> const&      shader,
     shader->Bind();
 
     // TODO
-    std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("m_ViewProjection",
+    std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection",
                                                                        s_SceneData->ViewProjectionMatrix);
-    std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("m_Transform", transform);
+    std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
     // mi.Bind();
 
