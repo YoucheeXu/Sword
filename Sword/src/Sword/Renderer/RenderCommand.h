@@ -9,6 +9,9 @@ namespace Sword {
 
 class RenderCommand {
 public:
+    inline static void Init() {
+        s_RendererAPI->Init();
+    }
     inline static void SetClearColor(glm::vec4 const& color) {
         s_RendererAPI->SetClearColor(color);
     }

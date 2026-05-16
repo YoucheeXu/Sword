@@ -7,9 +7,9 @@ namespace Sword {
 
 Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData();
 
-Renderer::Renderer() {}
-
-Renderer::~Renderer() {}
+void Renderer::Init() {
+    RenderCommand::Init();
+}
 
 void Renderer::BeginScene(OrthographicCamera const& camera) {
     s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();

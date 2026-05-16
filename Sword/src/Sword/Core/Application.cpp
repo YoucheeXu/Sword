@@ -1,10 +1,11 @@
 #include "Application.h"
 
+#include "Sword/Core/Log.h"
 #include "Sword/Core/TimeStep.h"
 #include "Sword/Events/Event.h"
-#include "Sword/ImGui/ImGuiLayer.h"
 #include "Sword/Events/ApplicationEvent.h"
-#include "Sword/Core/Log.h"
+#include "Sword/ImGui/ImGuiLayer.h"
+#include "Sword/Renderer/Renderer.h"
 
 #include <functional>
 #include <memory>
@@ -22,6 +23,8 @@ Application::Application() {
 
     m_Window = std::unique_ptr<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+    Renderer::Init();
 
     m_ImGuiLayer = new ImGuiLayer();
     PushOverLay(m_ImGuiLayer);

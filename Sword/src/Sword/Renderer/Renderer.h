@@ -14,8 +14,7 @@ namespace Sword {
 
 class Renderer {
 public:
-    Renderer();
-    ~Renderer();
+    static void Init();
 
     static void BeginScene(OrthographicCamera const& camera);
     static void EndScene();
