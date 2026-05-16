@@ -5,12 +5,18 @@
 
 #include "Sword/Renderer/Shader.h"
 
+#include <string>
+#include <unordered_map>
 #include <glm/ext/matrix_float4x4.hpp>
+
+// TODO: remove
+typedef unsigned int GLenum;
 
 namespace Sword {
 
 class OpenGLShader : public Shader {
 public:
+    OpenGLShader(std::string const& filepath);
     OpenGLShader(std::string const& vertexSrc, std::string const& fragmentSrc);
     virtual ~OpenGLShader();
 
@@ -26,6 +32,13 @@ public:
 
     void UploadUniformMat3(std::string const& name, glm::mat3 const& matrix);
     void UploadUniformMat4(std::string const& name, glm::mat4 const& matrix);
+
+private:
+    std::string ReadFile(std::string const& filepath);
+
+    std::unordered_map<GLenum, std::string> PreProcess(std::string const& source);
+
+    void Compile(std::unordered_map<GLenum, std::string>& shaderSource);
 
 private:
     uint32_t m_RendererID;

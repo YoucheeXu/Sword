@@ -16,6 +16,7 @@ public:
 
     // virtual void UploadVSRendererUniformBuffer() = 0;
 
+    static Shader* Create(std::string const& filepath);
     static Shader* Create(std::string const& vertexSrc, std::string const& fragmentSrc);
 };
 
