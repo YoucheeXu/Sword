@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "RendererAPI.h"
+#include "Sword/Core/Base.h"
+#include "Sword/Renderer/RendererAPI.h"
 
 namespace Sword {
 
@@ -20,7 +21,7 @@ public:
         s_RendererAPI->Clear();
     }
 
-    inline static void DrawIndexed(std::shared_ptr<VertexArray> const& vertexArray, uint32_t indexCount = 0) {
+    inline static void DrawIndexed(Ref<VertexArray> const& vertexArray, uint32_t indexCount = 0) {
         s_RendererAPI->DrawIndexed(vertexArray, indexCount);
     }
 

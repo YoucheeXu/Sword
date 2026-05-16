@@ -1,9 +1,9 @@
 #ifndef F8A9D02F_21E5_4615_9BE4_2D645599CAB4
 #define F8A9D02F_21E5_4615_9BE4_2D645599CAB4
 
-#include "Event.h"
-
 #include <sstream>
+
+#include "Event.h"
 
 namespace Sword {
 class SWORD_API MouseMovedEvent : public Event {

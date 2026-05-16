@@ -1,9 +1,9 @@
 #ifndef BF3CEA0A_F9A0_4258_A256_576901A73083
 #define BF3CEA0A_F9A0_4258_A256_576901A73083
 
-#include "Event.h"
-
 #include <sstream>
+
+#include "Event.h"
 
 namespace Sword {
 class SWORD_API KeyEvent : public Event {

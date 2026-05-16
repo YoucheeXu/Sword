@@ -1,7 +1,9 @@
 #include "Renderer.h"
-#include "Platform/OpenGL/OpenGLShader.h"
 
 #include <memory>
+
+#include "Sword/Renderer/RenderCommand.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Sword {
 
@@ -17,9 +19,7 @@ void Renderer::BeginScene(OrthographicCamera const& camera) {
 
 void Renderer::EndScene() {}
 
-void Renderer::Submit(std::shared_ptr<Shader> const&      shader,
-                      std::shared_ptr<VertexArray> const& vertexArray,
-                      glm::mat4 const&                    transform) {
+void Renderer::Submit(Ref<Shader> const& shader, Ref<VertexArray> const& vertexArray, glm::mat4 const& transform) {
     shader->Bind();
 
     // TODO

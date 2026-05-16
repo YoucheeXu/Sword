@@ -1,9 +1,9 @@
 #ifndef A685DDA0_6588_422E_9000_31C4AF8E941F
 #define A685DDA0_6588_422E_9000_31C4AF8E941F
 
-#include "Event.h"
-
 #include <sstream>
+
+#include "Event.h"
 
 namespace Sword {
 class SWORD_API WindowResizeEvent : public Event {

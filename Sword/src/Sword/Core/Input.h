@@ -3,8 +3,9 @@
 
 #pragma once
 
-#include "Core.h"
 #include <utility>
+
+#include "Sword/Core/Base.h"
 
 namespace Sword {
 

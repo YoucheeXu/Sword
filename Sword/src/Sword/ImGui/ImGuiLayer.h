@@ -4,8 +4,6 @@
 #pragma once
 
 #include "Sword/Core/Layer.h"
-#include "Sword/Events/KeyEvent.h"
-#include "Sword/Events/MouseEvent.h"
 #include "Sword/Events/ApplicationEvent.h"
 
 namespace Sword {

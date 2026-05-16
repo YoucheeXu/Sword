@@ -3,8 +3,9 @@
 
 #pragma once
 
-#include "Layer.h"
 #include <vector>
+
+#include "Layer.h"
 
 namespace Sword {
 class LayerStack {

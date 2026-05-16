@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include "Sword/Core/Core.h"
-
 #include <cstdint>
 #include <string>
+
+#include "Sword/Core/Base.h"
 
 namespace Sword {
 

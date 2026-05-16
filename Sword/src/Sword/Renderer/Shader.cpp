@@ -1,7 +1,7 @@
 #include "Shader.h"
+
 #include "Sword/Renderer/RendererAPI.h"
 #include "Platform/OpenGL/OpenGLShader.h"
-#include <memory>
 
 namespace Sword {
 Ref<Shader> Shader::Create(std::string const& filepath) {

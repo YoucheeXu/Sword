@@ -3,11 +3,11 @@
 
 #pragma once
 
-#include "Sword/Core/Core.h"
+#include <string>
+
+#include "Sword/Core/Base.h"
 #include "Sword/Core/TimeStep.h"
 #include "Sword/Events/Event.h"
-
-#include <string>
 
 namespace Sword {
 

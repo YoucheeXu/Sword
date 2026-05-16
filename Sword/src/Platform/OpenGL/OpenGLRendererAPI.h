@@ -3,9 +3,10 @@
 
 #pragma once
 
-#include "Sword/Renderer/RendererAPI.h"
+#include <glm/glm.hpp>
 
-#include <memory>
+#include "Sword/Core/Base.h"
+#include "Sword/Renderer/RendererAPI.h"
 
 namespace Sword {
 
@@ -19,7 +20,7 @@ public:
     virtual void SetClearColor(glm::vec4 const& color) override;
     virtual void Clear() override;
 
-    virtual void DrawIndexed(std::shared_ptr<VertexArray> const& vertexArray, uint32_t indexCount = 0) override;
+    virtual void DrawIndexed(Ref<VertexArray> const& vertexArray, uint32_t indexCount = 0) override;
 
 private:
 };

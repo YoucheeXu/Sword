@@ -12,6 +12,7 @@
 #include "Sword/Core/Input.h"
 #include "Sword/Core/KeyCodes.h"
 #include "Sword/Core/MouseCodes.h"
+#include "Sword/Events/KeyEvent.h"
 
 #include "Sword/ImGui/ImGuiLayer.h"
 

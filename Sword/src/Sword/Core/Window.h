@@ -1,10 +1,10 @@
 #ifndef DC87C5F0_573E_401C_8BD7_11AACC58C331
 #define DC87C5F0_573E_401C_8BD7_11AACC58C331
 
-#include "Sword/Core/Core.h"
-#include "Sword/Events/Event.h"
-
 #include <string>
+
+#include "Sword/Core/Base.h"
+#include "Sword/Events/Event.h"
 
 namespace Sword {
 struct WindowProps {

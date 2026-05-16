@@ -3,12 +3,12 @@
 
 #pragma once
 
-#include "Core.h"
+#include <memory>
 #define SPDLOG_HEADER_ONLY
 #include <spdlog/fmt/ostr.h>
 #include <spdlog/spdlog.h>
 
-#include <memory>
+#include "Sword/Core/Base.h"
 
 namespace Sword {
 

@@ -1,7 +1,7 @@
 #ifndef D49E75EF_47CE_46AE_8777_C7414D591C5B
 #define D49E75EF_47CE_46AE_8777_C7414D591C5B
 
-#include "Sword/Core/Core.h"
+#include "Sword/Core/Base.h"
 #include "Sword/Core/Log.h"
 
 #ifdef SW_ENABLE_ASSERTS

@@ -1,5 +1,6 @@
 #include "VertexArray.h"
-#include "Sword/Core/Core.h"
+
+#include "Sword/Core/Assert.h"
 #include "Sword/Renderer/RendererAPI.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 

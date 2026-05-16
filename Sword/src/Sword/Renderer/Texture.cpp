@@ -1,8 +1,10 @@
 #include "Texture.h"
 
+#include <memory>
+
+#include "Sword/Core/Assert.h"
 #include "Sword/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
-#include <memory>
 
 namespace Sword {
 

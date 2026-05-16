@@ -1,15 +1,15 @@
 #include "Application.h"
 
-#include "Sword/Core/Log.h"
-#include "Sword/Core/TimeStep.h"
-#include "Sword/Events/Event.h"
-#include "Sword/Events/ApplicationEvent.h"
-#include "Sword/ImGui/ImGuiLayer.h"
-#include "Sword/Renderer/Renderer.h"
-
 #include <functional>
 #include <memory>
 #include <GLFW/glfw3.h>
+
+#include "Sword/Core/Assert.h"
+#include "Sword/Core/TimeStep.h"
+#include "Sword/Events/Event.h"
+#include "Sword/Events/ApplicationEvent.h"
+#include "Sword/Renderer/Renderer.h"
+#include "Sword/ImGui/ImGuiLayer.h"
 
 namespace Sword {
 

@@ -1,6 +1,6 @@
 #include "OpenGLVertexArray.h"
-#include <cstdint>
 
+#include <cstdint>
 #include <glad/glad.h>
 
 namespace Sword {
@@ -53,7 +53,7 @@ void OpenGLVertexArray::Unbind() const {
     glBindVertexArray(0);
 }
 
-void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> const& vertexBuffer) {
+void OpenGLVertexArray::AddVertexBuffer(Ref<VertexBuffer> const& vertexBuffer) {
     SW_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
     glBindVertexArray(m_RendererID);
@@ -75,7 +75,7 @@ void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> const& ver
     m_VertexBuffers.push_back(vertexBuffer);
 }
 
-void OpenGLVertexArray::SetIndexBuffer(std::shared_ptr<IndexBuffer> const& indexBuffer) {
+void OpenGLVertexArray::SetIndexBuffer(Ref<IndexBuffer> const& indexBuffer) {
     glBindVertexArray(m_RendererID);
     indexBuffer->Bind();
 

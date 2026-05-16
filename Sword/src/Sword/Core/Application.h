@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Sword/Core/Core.h"
+#include "Sword/Core/Base.h"
 #include "Sword/Events/Event.h"
 #include "Sword/Events/ApplicationEvent.h"
 #include "Sword/Core/Window.h"

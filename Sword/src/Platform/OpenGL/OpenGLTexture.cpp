@@ -1,9 +1,11 @@
 #include "OpenGLTexture.h"
+
 #include <cassert>
 #include <cstdint>
-
 #include <glad/glad.h>
 #include <stb_image.h>
+
+#include "Sword/Core/Assert.h"
 
 namespace Sword {
 
@@ -11,8 +13,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string const& path) : m_Path(path) {
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);
     auto data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-    // SW_CORE_ASSERT(data, "Failed to load image!");
-    assert(data);
+    SW_CORE_ASSERT(data, "Failed to load image!");
 
     m_Width  = width;
     m_Height = height;
@@ -26,8 +27,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string const& path) : m_Path(path) {
         dataFormat     = GL_RGB;
     }
 
-    // SW_CORE_ASSERT(internalFormat && dataFormat, "Format not supported!")
-    assert(internalFormat && dataFormat);
+    SW_CORE_ASSERT(internalFormat && dataFormat, "Format not supported!");
 
     glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
     glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);

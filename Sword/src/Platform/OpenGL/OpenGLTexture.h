@@ -1,8 +1,9 @@
 #ifndef OPENGLTEXTURE_H
 #define OPENGLTEXTURE_H
 
-#include <cstdint>
 #pragma once
+
+#include <cstdint>
 
 #include "Sword/Renderer/Texture.h"
 
@@ -20,7 +21,7 @@ public:
         return m_Height;
     }
 
-    void Bind(uint32_t slot) override;
+    virtual void Bind(uint32_t slot) override;
 
 private:
     std::string m_Path;

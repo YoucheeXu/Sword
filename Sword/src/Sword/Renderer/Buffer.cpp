@@ -1,7 +1,7 @@
 #include "Buffer.h"
 
-#include "Sword/Core/Core.h"
-#include "RendererAPI.h"
+#include "Sword/Core/Assert.h"
+#include "Sword/Renderer/RendererAPI.h"
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
 

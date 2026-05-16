@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include "Sword/Renderer/VertexArray.h"
+#include <glm/fwd.hpp>
 
-#include <memory>
-#include <glm/glm.hpp>
+#include "Sword/Core/Base.h"
+#include "Sword/Renderer/VertexArray.h"
 
 namespace Sword {
 
@@ -22,7 +22,7 @@ public:
     virtual void SetClearColor(glm::vec4 const& color) = 0;
     virtual void Clear()                               = 0;
 
-    virtual void DrawIndexed(std::shared_ptr<VertexArray> const& vertexArray, uint32_t indexCount = 0) = 0;
+    virtual void DrawIndexed(Ref<VertexArray> const& vertexArray, uint32_t indexCount = 0) = 0;
 
     inline static API GetAPI() {
         return s_API;

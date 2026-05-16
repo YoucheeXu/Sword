@@ -1,11 +1,11 @@
 #ifndef B347B851_53BC_40E0_AF1E_E9B23A349D23
 #define B347B851_53BC_40E0_AF1E_E9B23A349D23
 
-#include "Sword/Core/Core.h"
-
 #include <functional>
 // #include <ostream>
 #include <string>
+
+#include "Sword/Core/Base.h"
 
 namespace Sword {
 // Events in Sword are currently blocking, meaning when an event occurs it

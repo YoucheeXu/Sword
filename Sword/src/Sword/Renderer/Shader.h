@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include "Sword/Core/Core.h"
-
 #include <string>
 #include <unordered_map>
+
+#include "Sword/Core/Base.h"
 
 namespace Sword {
 

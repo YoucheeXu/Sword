@@ -3,11 +3,11 @@
 
 #pragma once
 
-#include "Sword/Renderer/Shader.h"
-
 #include <string>
 #include <unordered_map>
 #include <glm/ext/matrix_float4x4.hpp>
+
+#include "Sword/Renderer/Shader.h"
 
 // TODO: remove
 typedef unsigned int GLenum;
