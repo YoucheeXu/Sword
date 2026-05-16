@@ -2,6 +2,7 @@
 
 #include "Sword/Core/Log.h"
 
+#include <array>
 #include <fstream>
 #include <vector>
 #include <glad/glad.h>
@@ -29,7 +30,7 @@ OpenGLShader::OpenGLShader(std::string const& filepath) {
 
 OpenGLShader::OpenGLShader(std::string const& vertexSrc, std::string const& fragmentSrc) {
     std::unordered_map<GLenum, std::string> sources;
-    sources[GL_VERTEX_SHADER] = vertexSrc;
+    sources[GL_VERTEX_SHADER]   = vertexSrc;
     sources[GL_FRAGMENT_SHADER] = fragmentSrc;
     Compile(sources);
 }
@@ -85,8 +86,9 @@ void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSource
     // Get a program object.
     GLuint program = glCreateProgram();
 
-    std::vector<GLenum> glShaderIDs;
-    glShaderIDs.reserve(shaderSource.size());
+    SW_CORE_ASSERT(shaderSource.size() <= 2, "We only support 2 shaders for now.");
+    std::array<GLenum, 2> glShaderIDs;
+    int                   glShaderIDIndex = 0;
     for (auto& kv : shaderSource) {
         GLenum             type   = kv.first;
         std::string const& source = kv.second;
@@ -127,7 +129,7 @@ void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSource
         // Attach our shaders to our program
         glAttachShader(program, shader);
 
-        glShaderIDs.push_back(shader);
+        glShaderIDs[glShaderIDIndex++] = shader;
     }
 
     // Link our program
