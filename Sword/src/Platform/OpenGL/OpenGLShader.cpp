@@ -4,6 +4,7 @@
 
 #include <array>
 #include <fstream>
+#include <string>
 #include <vector>
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -26,9 +27,20 @@ OpenGLShader::OpenGLShader(std::string const& filepath) {
     std::string source       = ReadFile(filepath);
     auto        shaderSource = PreProcess(source);
     Compile(shaderSource);
+
+    // Extract name from file path
+    // example: assets/shaders/Texture.glsl
+    auto lastSlash = filepath.find_last_of("/\\");
+    // example: Texture.glsl
+    lastSlash    = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+    auto lastDot = filepath.rfind('.');
+    // example: assets/shaders/Texture
+    auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+    m_Name     = filepath.substr(lastSlash, count);
 }
 
-OpenGLShader::OpenGLShader(std::string const& vertexSrc, std::string const& fragmentSrc) {
+OpenGLShader::OpenGLShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc)
+    : m_Name(name) {
     std::unordered_map<GLenum, std::string> sources;
     sources[GL_VERTEX_SHADER]   = vertexSrc;
     sources[GL_FRAGMENT_SHADER] = fragmentSrc;

@@ -17,11 +17,15 @@ namespace Sword {
 class OpenGLShader : public Shader {
 public:
     OpenGLShader(std::string const& filepath);
-    OpenGLShader(std::string const& vertexSrc, std::string const& fragmentSrc);
+    OpenGLShader(std::string const& name, std::string const& vertexSrc, std::string const& fragmentSrc);
     virtual ~OpenGLShader();
 
     virtual void Bind() const override;
     virtual void Unbind() const override;
+
+    virtual std::string const& GetName() const override {
+        return m_Name;
+    }
 
     void UploadUniformInt(std::string const& name, int val);
 
@@ -41,7 +45,8 @@ private:
     void Compile(std::unordered_map<GLenum, std::string>& shaderSource);
 
 private:
-    uint32_t m_RendererID;
+    uint32_t    m_RendererID;
+    std::string m_Name;
 };
 
 }  // namespace Sword

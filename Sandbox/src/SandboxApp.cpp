@@ -90,7 +90,7 @@ public:
             }
         )";
 
-        m_Shader.reset(Sword::Shader::Create(vertexSrc, fragmentSrc));
+        m_Shader = Sword::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
         std::string flatColorShaderVertexSrc = R"(
             #version 330 core
@@ -122,15 +122,15 @@ public:
             }           
         )";
 
-        m_FlatColorShader.reset(Sword::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+        m_FlatColorShader = Sword::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
-        m_TextureShader.reset(Sword::Shader::Create("assets/shaders/Texture.glsl"));
+        auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
         m_Texture           = Sword::Texture2D::Create("assets/textures/Checkerboard.png");
         m_ChernoLogoTexture = Sword::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-        std::dynamic_pointer_cast<Sword::OpenGLShader>(m_TextureShader)->Bind();
-        std::dynamic_pointer_cast<Sword::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+        std::dynamic_pointer_cast<Sword::OpenGLShader>(textureShader)->Bind();
+        std::dynamic_pointer_cast<Sword::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
     }
 
     virtual void OnUpdate(Sword::TimeStep ts) override {
@@ -202,12 +202,13 @@ public:
             }
         }
 
-        m_Texture->Bind();
+        auto textureShader = m_ShaderLibrary.Get("Texture");
 
-        Sword::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        m_Texture->Bind();
+        Sword::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         m_ChernoLogoTexture->Bind();
-        Sword::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        Sword::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         // Triangle
         // glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), m_SquarePosition);
@@ -242,10 +243,11 @@ public:
     }
 
 private:
+    Sword::ShaderLibrary           m_ShaderLibrary;
     Sword::Ref<Sword::Shader>      m_Shader;
     Sword::Ref<Sword::VertexArray> m_VertexArray;
 
-    Sword::Ref<Sword::Shader>      m_FlatColorShader, m_TextureShader;
+    Sword::Ref<Sword::Shader>      m_FlatColorShader;
     Sword::Ref<Sword::VertexArray> m_SquareVertexArray;
 
     Sword::Ref<Sword::Texture2D> m_Texture, m_ChernoLogoTexture;
