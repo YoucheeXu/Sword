@@ -26,6 +26,8 @@
 #include "Sword/Renderer/VertexArray.h"
 
 #include "Sword/Renderer/OrthographicCamera.h"
+#include "Sword/Renderer/OrthographicCameraController.h"
+
 // ---------------------
 
 // ---- Entry Point ----

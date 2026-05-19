@@ -10,16 +10,19 @@
 
 class ExampleLayer : public Sword::Layer {
 public:
-    ExampleLayer()
-        : Layer("Example"), m_Camera(-2.0f, 2.0f, -1.125f, 1.125f), m_CameraPosition(0.0f), m_SquarePosition(0.0f) {
+    ExampleLayer() : Layer("Example"), m_CameraController(1280.f / 720.f, true), m_SquarePosition(0.0f) {
         // Vertex Array
         m_VertexArray.reset(Sword::VertexArray::Create());
 
         // Vertex Buffer
-        float vertices[3 * 7] = {
-            -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f,
-            0.3f,  0.8f,  1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,  1.0f,
+        /* clang-format off */
+        float vertices[7 * 3] = {
+            -0.5f, -0.5f,  0.0f,  0.8f,  0.2f,  0.8f,  1.0f,
+             0.5f, -0.5f,  0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+            0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
         };
+        /* clang-format on */
+
         std::shared_ptr<Sword::VertexBuffer> vertexBuffer;
         vertexBuffer.reset(Sword::VertexBuffer::Create(vertices, sizeof(vertices)));
 
@@ -38,8 +41,13 @@ public:
 
         m_SquareVertexArray.reset(Sword::VertexArray::Create());
 
-        float squareVertices[5 * 4] = {-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,
-                                       0.5f,  0.5f,  0.0f, 1.0f, 1.0f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f};
+        /* clang-format off */
+        float squareVertices[5 * 4] = {
+            -0.5f,  -0.5f,  0.0f,  0.0f,  0.0f,
+             0.5f,  -0.5f,  0.0f,  1.0f,  0.0f,
+            0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+            -0.5f, 0.5f, 0.0f, 0.0f, 1.0f};
+        /* clang-format on */
 
         std::shared_ptr<Sword::VertexBuffer> squareVertexBuffer;
         squareVertexBuffer.reset(Sword::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -134,26 +142,10 @@ public:
     }
 
     virtual void OnUpdate(Sword::TimeStep ts) override {
-        // more smooth
-        float moveSpeed = m_CameraMoveSpeed * ts;
-        if (Sword::Input::IsKeyPressed(Sword::Key::Left)) {
-            m_CameraPosition.x += moveSpeed;
-        } else if (Sword::Input::IsKeyPressed(Sword::Key::Right)) {
-            m_CameraPosition.x -= moveSpeed;
-        } else if (Sword::Input::IsKeyPressed(Sword::Key::Down)) {
-            m_CameraPosition.y += moveSpeed;
-        } else if (Sword::Input::IsKeyPressed(Sword::Key::Up)) {
-            m_CameraPosition.y -= moveSpeed;
-        }
+        // Update
+        m_CameraController.OnUpdate(ts);
 
-        float rotationSpeed = m_CameraRotationSpeed * ts;
-        if (Sword::Input::IsKeyPressed(Sword::Key::A)) {
-            m_CameraRotation -= rotationSpeed;
-        } else if (Sword::Input::IsKeyPressed(Sword::Key::D)) {
-            m_CameraRotation += rotationSpeed;
-        }
-
-        moveSpeed = m_SquareMoveSpeed * ts;
+        float moveSpeed = m_SquareMoveSpeed * ts;
         if (Sword::Input::IsKeyPressed(Sword::Key::J)) {
             m_SquarePosition.x -= moveSpeed;
         } else if (Sword::Input::IsKeyPressed(Sword::Key::L)) {
@@ -164,13 +156,11 @@ public:
             m_SquarePosition.y += moveSpeed;
         }
 
+        // Render
         Sword::RenderCommand::SetClearColor({0.1, 0.1, 0.1, 1});
         Sword::RenderCommand::Clear();
 
-        m_Camera.SetPosition(m_CameraPosition);
-        m_Camera.SetRotation(m_CameraRotation);
-
-        Sword::Renderer::BeginScene(m_Camera);
+        Sword::Renderer::BeginScene(m_CameraController.GetCamera());
 
         static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -204,15 +194,14 @@ public:
 
         auto textureShader = m_ShaderLibrary.Get("Texture");
 
+        auto transfrom
+            = glm::translate(glm::mat4(1.0f), m_SquarePosition) * glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
+
         m_Texture->Bind();
-        Sword::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        Sword::Renderer::Submit(textureShader, m_SquareVertexArray, transfrom);
 
         m_ChernoLogoTexture->Bind();
-        Sword::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-
-        // Triangle
-        // glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), m_SquarePosition);
-        // Sword::Renderer::Submit(m_Shader, m_VertexArray, transform2);
+        Sword::Renderer::Submit(textureShader, m_SquareVertexArray, transfrom);
 
         Sword::Renderer::EndScene();
     }
@@ -223,9 +212,11 @@ public:
         ImGui::End();
     }
 
-    virtual void OnEvent(Sword::Event& event) override {
-        Sword::EventDispatcher dispatcher(event);
+    virtual void OnEvent(Sword::Event& e) override {
+        Sword::EventDispatcher dispatcher(e);
         dispatcher.Dispatch<Sword::KeyPressedEvent>(SW_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
+
+        m_CameraController.OnEvent(e);
     }
 
     bool OnKeyPressedEvent(Sword::KeyPressedEvent& event) {
@@ -252,13 +243,7 @@ private:
 
     Sword::Ref<Sword::Texture2D> m_Texture, m_ChernoLogoTexture;
 
-    Sword::OrthographicCamera m_Camera;
-
-    glm::vec3 m_CameraPosition;
-    float     m_CameraMoveSpeed = 5.0f;
-
-    float m_CameraRotation      = 0.0f;
-    float m_CameraRotationSpeed = 180.0f;
+    Sword::OrthographicCameraController m_CameraController;
 
     glm::vec3 m_SquarePosition;
     float     m_SquareMoveSpeed = 1.0f;

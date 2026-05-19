@@ -59,9 +59,6 @@ void Application::OnEvent(Event& e) {
 }
 
 void Application::Run() {
-    WindowResizeEvent e(1980, 720);
-    SW_TRACE(e);
-
     while (m_Running) {
         float    time     = (float)glfwGetTime();  // Platform::GetTime()
         TimeStep timeStep = time - m_LastFrameTime;

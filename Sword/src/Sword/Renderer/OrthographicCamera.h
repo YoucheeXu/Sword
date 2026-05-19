@@ -13,6 +13,8 @@ public:
     OrthographicCamera(float left, float right, float bottom, float top);
     ~OrthographicCamera();
 
+    void SetProjection(float left, float right, float bottom, float top);
+
     inline glm::vec3 const& GetPosition() const {
         return m_Position;
     }
