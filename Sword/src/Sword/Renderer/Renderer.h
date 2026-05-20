@@ -1,6 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <cstdint>
 #pragma once
 
 #include "Sword/Core/Base.h"
@@ -25,6 +26,8 @@ public:
     static RendererAPI::API GetAPI() {
         return RendererAPI::GetAPI();
     }
+
+    static void OnWindowResize(uint32_t nWidth, uint32_t nHeight);
 
 private:
     struct SceneData {

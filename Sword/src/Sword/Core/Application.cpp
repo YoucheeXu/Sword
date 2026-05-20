@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "Sword/Core/Assert.h"
+#include "Sword/Core/Log.h"
 #include "Sword/Core/TimeStep.h"
 #include "Sword/Events/Event.h"
 #include "Sword/Events/ApplicationEvent.h"
@@ -47,6 +48,7 @@ void Application::PushOverLay(Layer* layer) {
 void Application::OnEvent(Event& e) {
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+    dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 
     // SW_CORE_TRACE(e.ToString());
 
@@ -64,15 +66,17 @@ void Application::Run() {
         TimeStep timeStep = time - m_LastFrameTime;
         m_LastFrameTime   = time;
 
-        for (Layer* layer : m_LayerStack) {
-            layer->OnUpdate(timeStep);
-        }
+        if (!m_Minimized) {
+            for (Layer* layer : m_LayerStack) {
+                layer->OnUpdate(timeStep);
+            }
 
-        m_ImGuiLayer->Begin();
-        for (Layer* layer : m_LayerStack) {
-            layer->OnImGuiRender();
+            m_ImGuiLayer->Begin();
+            for (Layer* layer : m_LayerStack) {
+                layer->OnImGuiRender();
+            }
+            m_ImGuiLayer->End();
         }
-        m_ImGuiLayer->End();
 
         m_Window->OnUpdate();
     }
@@ -80,7 +84,21 @@ void Application::Run() {
 
 bool Application::OnWindowClose(WindowCloseEvent& e) {
     m_Running = false;
+
     return true;
+}
+
+bool Application::OnWindowResize(WindowResizeEvent& e) {
+    if (e.GetWidth() == 0 || e.GetHeight() == 0) {
+        m_Minimized = true;
+        return false;
+    }
+
+    m_Minimized = false;
+    Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+    // SW_CORE_INFO("{0}x{1}", e.GetWidth(), e.GetHeight());
+
+    return false;
 }
 
 }  // namespace Sword

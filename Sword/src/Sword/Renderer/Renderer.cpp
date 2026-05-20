@@ -33,4 +33,8 @@ void Renderer::Submit(Ref<Shader> const& shader, Ref<VertexArray> const& vertexA
     RenderCommand::DrawIndexed(vertexArray);
 }
 
+void Renderer::OnWindowResize(uint32_t nWidth, uint32_t nHeight) {
+    RenderCommand::SetViewport(0, 0, nWidth, nHeight);
+}
+
 }  // namespace Sword

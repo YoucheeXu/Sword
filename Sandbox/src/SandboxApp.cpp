@@ -7,6 +7,8 @@
 #include "Sword.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
+#include "Sword/Events/ApplicationEvent.h"
+#include "Sword/Events/Event.h"
 
 class ExampleLayer : public Sword::Layer {
 public:
@@ -217,6 +219,14 @@ public:
         dispatcher.Dispatch<Sword::KeyPressedEvent>(SW_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
 
         m_CameraController.OnEvent(e);
+
+        if (e.GetEventType() == Sword::EventType::WindowResize) {
+            auto& re = (Sword::WindowResizeEvent&)e;
+
+            float zoom = (float)re.GetWidth() / 1280.0f;
+            //    re.GetHeight()
+            m_CameraController.SetZoomLevel(zoom);
+        }
     }
 
     bool OnKeyPressedEvent(Sword::KeyPressedEvent& event) {
