@@ -53,7 +53,6 @@ void OrthographicCameraController::OnEvent(Event& e) {
 bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e) {
     m_ZoomLevel -= e.GetYoffset() * 0.25f;
     m_ZoomLevel  = std::min(m_ZoomLevel, 8.0f);
-    // SW_CORE_TRACE("zoom level: {}", m_ZoomLevel);
     m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 
     return false;

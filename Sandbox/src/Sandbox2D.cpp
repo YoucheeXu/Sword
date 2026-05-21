@@ -3,16 +3,13 @@
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Platform/OpenGL/OpenGLShader.h"
-#include "glm/ext/matrix_float4x4.hpp"
-
 Sandbox2D::Sandbox2D()
     : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f), m_SquareColor({0.2f, 0.3f, 0.8f, 1.0f}) {}
 
 Sandbox2D::~Sandbox2D() {}
 
 void Sandbox2D::OnAttach() {
-
+    m_CheckboardTexture = Sword::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
 void Sandbox2D::OnDetach() {}
@@ -30,8 +27,9 @@ void Sandbox2D::OnUpdate(Sword::TimeStep ts) {
     Sword::Renderer2D::DrawQuad({-1.0, 0.0f}, {0.8f, 0.8f}, {0.8f, 0.2f, 0.3f, 1.0f});
     Sword::Renderer2D::DrawQuad({0.5, -0.5f}, {0.5f, 0.75f}, {0.2f, 0.3f, 0.8f, 1.0f});
 
-    Sword::Renderer2D::EndScene();
+    Sword::Renderer2D::DrawQuad({0.0, 0.0f, -0.1f}, {10.0f, 10.0f}, m_CheckboardTexture);
 
+    Sword::Renderer2D::EndScene();
 }
 
 void Sandbox2D::OnImGuiRender() {
@@ -40,4 +38,6 @@ void Sandbox2D::OnImGuiRender() {
     ImGui::End();
 }
 
-void Sandbox2D::OnEvent(Sword::Event& event) {}
+void Sandbox2D::OnEvent(Sword::Event& event) {
+    m_CameraController.OnEvent(event);
+}

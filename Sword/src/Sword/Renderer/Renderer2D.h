@@ -3,9 +3,10 @@
 
 #pragma once
 
-#include "glm/ext/vector_float2.hpp"
+#include <glm/ext/vector_float2.hpp>
 
 #include "OrthographicCamera.h"
+#include "Sword/Renderer/Texture.h"
 
 namespace Sword {
 
@@ -21,8 +22,10 @@ public:
     static void EndScene();
 
     // Primitives
-    static void DrawQuad(glm::vec2 const& position, const glm::vec2& size, const glm::vec4& color);
-    static void DrawQuad(glm::vec3 const& position, const glm::vec2& size, const glm::vec4& color);
+    static void DrawQuad(glm::vec2 const& position, glm::vec2 const& size, glm::vec4 const& color);
+    static void DrawQuad(glm::vec3 const& position, glm::vec2 const& size, glm::vec4 const& color);
+    static void DrawQuad(glm::vec2 const& position, glm::vec2 const& size, Ref<Texture2D> const& texture);
+    static void DrawQuad(glm::vec3 const& position, glm::vec2 const& size, Ref<Texture2D> const& texture);
 
 private:
 };

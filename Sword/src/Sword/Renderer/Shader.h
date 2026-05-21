@@ -19,6 +19,7 @@ public:
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
+    virtual void SetInt(std::string const& name, int value)                 = 0;
     virtual void SetFloat3(std::string const& name, glm::vec3 const& value) = 0;
     virtual void SetFloat4(std::string const& name, glm::vec4 const& value) = 0;
     virtual void SetMat4(std::string const& name, glm::mat4 const& value)   = 0;

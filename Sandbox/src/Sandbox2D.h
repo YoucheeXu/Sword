@@ -21,8 +21,9 @@ private:
     Sword::OrthographicCameraController m_CameraController;
 
     Sword::Ref<Sword::Shader>      m_FlatColorShader;
-    Sword::Ref<Sword::Texture2D>   m_Texture;
     Sword::Ref<Sword::VertexArray> m_SquareVertexArray;
+
+    Sword::Ref<Sword::Texture2D>   m_CheckboardTexture;
 
     glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
 };

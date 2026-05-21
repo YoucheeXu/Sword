@@ -23,6 +23,7 @@ public:
     virtual void Bind() const override;
     virtual void Unbind() const override;
 
+    virtual void SetInt(std::string const& name, int value) override;
     virtual void SetFloat3(std::string const& name, glm::vec3 const& value) override;
     virtual void SetFloat4(std::string const& name, glm::vec4 const& value) override;
     virtual void SetMat4(std::string const& name, glm::mat4 const& value) override;

@@ -190,6 +190,11 @@ void OpenGLShader::Unbind() const {
     glUseProgram(0);
 }
 
+void OpenGLShader::SetInt(std::string const& name, int value) {
+    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniform1i(location, value);
+}
+
 void OpenGLShader::SetFloat3(std::string const& name, glm::vec3 const& value) {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform3f(location, value.x, value.y, value.z);
