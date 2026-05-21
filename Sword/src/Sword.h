@@ -27,11 +27,6 @@
 
 #include "Sword/Renderer/OrthographicCamera.h"
 #include "Sword/Renderer/OrthographicCameraController.h"
-
-// ---------------------
-
-// ---- Entry Point ----
-#include "Sword/Core/EntryPoint.h"
 // ---------------------
 
 #endif /* A4F91456_F948_4788_8885_82765969EEBA */

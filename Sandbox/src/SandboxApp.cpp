@@ -5,16 +5,16 @@
 #include <imgui.h>
 
 #include "Sword.h"
+#include "Sword/Core/EntryPoint.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
-#include "Sword/Events/ApplicationEvent.h"
-#include "Sword/Events/Event.h"
+#include "Sandbox2D.h"
 
 class ExampleLayer : public Sword::Layer {
 public:
     ExampleLayer() : Layer("Example"), m_CameraController(1280.f / 720.f, true), m_SquarePosition(0.0f) {
         // Vertex Array
-        m_VertexArray.reset(Sword::VertexArray::Create());
+        m_VertexArray = Sword::VertexArray::Create();
 
         // Vertex Buffer
         /* clang-format off */
@@ -41,7 +41,7 @@ public:
         indexBuffer.reset(Sword::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
-        m_SquareVertexArray.reset(Sword::VertexArray::Create());
+        m_SquareVertexArray = Sword::VertexArray::Create();
 
         /* clang-format off */
         float squareVertices[5 * 4] = {
@@ -62,8 +62,8 @@ public:
         m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
 
         // Index Buffer
-        unsigned int                        squareIndices[6] = {0, 1, 2, 2, 3, 0};
-        std::shared_ptr<Sword::IndexBuffer> squareIndexBuffer;
+        unsigned int                   squareIndices[6] = {0, 1, 2, 2, 3, 0};
+        Sword::Ref<Sword::IndexBuffer> squareIndexBuffer;
         squareIndexBuffer.reset(Sword::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
         m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
@@ -264,7 +264,8 @@ private:
 class Sandbox : public Sword::Application {
 public:
     Sandbox() {
-        PushLayer(new ExampleLayer());
+        // PushLayer(new ExampleLayer());
+        PushLayer(new Sandbox2D());
     }
 
     ~Sandbox() {}
