@@ -18,6 +18,7 @@
 
 // ---- Renderer ----
 #include "Sword/Renderer/Renderer.h"
+#include "Sword/Renderer/Renderer2D.h"
 #include "Sword/Renderer/RenderCommand.h"
 
 #include "Sword/Renderer/Buffer.h"
