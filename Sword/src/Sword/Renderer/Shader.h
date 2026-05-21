@@ -1,6 +1,8 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "glm/ext/matrix_float4x4.hpp"
+#include "glm/ext/vector_float3.hpp"
 #pragma once
 
 #include <string>
@@ -16,6 +18,10 @@ public:
 
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
+
+    virtual void SetFloat3(std::string const& name, glm::vec3 const& value) = 0;
+    virtual void SetFloat4(std::string const& name, glm::vec4 const& value) = 0;
+    virtual void SetMat4(std::string const& name, glm::mat4 const& value)   = 0;
 
     virtual std::string const& GetName() const = 0;
 

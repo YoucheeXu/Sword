@@ -190,6 +190,21 @@ void OpenGLShader::Unbind() const {
     glUseProgram(0);
 }
 
+void OpenGLShader::SetFloat3(std::string const& name, glm::vec3 const& value) {
+    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniform3f(location, value.x, value.y, value.z);
+}
+
+void OpenGLShader::SetFloat4(std::string const& name, glm::vec4 const& value) {
+    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniform4f(location, value.x, value.y, value.z, value.w);
+}
+
+void OpenGLShader::SetMat4(std::string const& name, glm::mat4 const& value) {
+    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+}
+
 void OpenGLShader::UploadUniformInt(std::string const& name, int val) {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform1i(location, val);
